@@ -12,6 +12,7 @@ class LogoWidget extends StatelessWidget {
       shadowColor: Colors.tealAccent,
       color: couleurePrincipale,
       shape: RoundedRectangleBorder(
+        side: BorderSide(color: couleureSecondaire),
         borderRadius: BorderRadiusGeometry.circular(50),
       ),
       child: Padding(

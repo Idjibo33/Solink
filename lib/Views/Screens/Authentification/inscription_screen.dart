@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
+import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
 import 'package:so_link/Views/Widgets/password_text_field.dart';
@@ -26,15 +29,10 @@ class InscriptionScreen extends StatelessWidget {
               children: [
                 // Logo
                 LogoWidget(padding: 16, size: 50),
+
                 // Entrée utilisateur
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(26),
-                    border: Border.all(width: 1, color: couleureSecondaire),
-                    color: couleureBlancheDark,
-                  ),
-                  child: Padding(
+                CustomContainer(
+                  children: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
                       spacing: 12,
