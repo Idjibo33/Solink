@@ -3,6 +3,7 @@ import 'package:so_link/Models/naviguer_inscription_screen.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
+import 'package:so_link/Views/Widgets/password_text_field.dart';
 import 'package:so_link/constants.dart';
 
 class ConnexionScreen extends StatelessWidget {
@@ -37,13 +38,11 @@ class ConnexionScreen extends StatelessWidget {
                         labelTexte: "email",
                         hintTexte: "ex : djiboismaelzeno@gmail.com",
                         icone: Icons.mail,
-                        cacherContenu: false,
                       ),
-                      CustomTextField(
-                        labelTexte: "Mot de passe",
+                      PasswordTextField(
+                        labelTexte: "Mote de passe",
                         hintTexte: "******",
                         icone: Icons.lock,
-                        cacherContenu: true,
                       ),
                     ],
                   ),
@@ -54,6 +53,7 @@ class ConnexionScreen extends StatelessWidget {
                 action: () {},
                 chargement: false,
               ),
+
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

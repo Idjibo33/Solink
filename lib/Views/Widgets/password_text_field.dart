@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:so_link/constants.dart';
 
-class CustomTextField extends StatelessWidget {
+class PasswordTextField extends StatefulWidget {
   final IconData icone;
   final String labelTexte;
   final String hintTexte;
-  const CustomTextField({
+  const PasswordTextField({
     super.key,
 
     required this.labelTexte,
     required this.hintTexte,
     required this.icone,
   });
+
+  @override
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  bool cacherPw = true;
+  void changerVisibilitePw() {
+    setState(() {
+      cacherPw = !cacherPw;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +33,16 @@ class CustomTextField extends StatelessWidget {
         spacing: 8,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(labelTexte, style: textfieldLabel),
+          Text(widget.labelTexte, style: textfieldLabel),
           TextField(
+            obscureText: cacherPw,
             decoration: InputDecoration(
-              prefixIcon: Icon(icone, color: Colors.black38),
-              hintText: hintTexte,
+              prefixIcon: Icon(widget.icone, color: Colors.black38),
+              suffixIcon: IconButton(
+                onPressed: () => changerVisibilitePw(),
+                icon: Icon(cacherPw ? Icons.visibility : Icons.visibility_off),
+              ),
+              hintText: widget.hintTexte,
               hintStyle: hintText,
               filled: true,
               fillColor: couleureSecondaire,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
+import 'package:so_link/Views/Widgets/password_text_field.dart';
 import 'package:so_link/constants.dart';
 
 class InscriptionScreen extends StatelessWidget {
@@ -42,25 +43,21 @@ class InscriptionScreen extends StatelessWidget {
                           labelTexte: "Nom",
                           hintTexte: "ex : Djibo Adamou",
                           icone: Icons.person,
-                          cacherContenu: false,
                         ),
                         CustomTextField(
                           labelTexte: "Prenom",
                           hintTexte: "ex : Ismael",
                           icone: Icons.person,
-                          cacherContenu: false,
                         ),
                         CustomTextField(
                           labelTexte: "email",
                           hintTexte: "ex : djiboismaelzeno@gmail.com",
                           icone: Icons.mail,
-                          cacherContenu: false,
                         ),
-                        CustomTextField(
+                        PasswordTextField(
                           labelTexte: "Mot de passe",
                           hintTexte: "******",
                           icone: Icons.lock,
-                          cacherContenu: true,
                         ),
                       ],
                     ),
