@@ -11,11 +11,9 @@ class BoutonSecondaire extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SizedBox(
-        width: double.infinity,
-        child: OutlinedButton(onPressed: action, child: Text("Test")),
-      ),
+    return SizedBox(
+      width: double.infinity,
+      child: OutlinedButton(onPressed: action, child: Text("Test")),
     );
   }
 }

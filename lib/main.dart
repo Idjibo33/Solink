@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:so_link/Views/Screens/Authentification/connexion_screen.dart';
 import 'package:so_link/constants.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: couleurePrincipale),
       ),
-      home: Scaffold(),
+      home: ConnexionScreen(),
     );
   }
 }

@@ -13,15 +13,13 @@ class BoutonPrincipale extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: chargement ? null : action,
-          child: chargement
-              ? CircularProgressIndicator.adaptive()
-              : Text("bouton"),
-        ),
+    return SizedBox(
+      width: double.infinity,
+      child: FilledButton(
+        onPressed: chargement ? null : action,
+        child: chargement
+            ? CircularProgressIndicator.adaptive()
+            : Text("bouton"),
       ),
     );
   }

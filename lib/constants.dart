@@ -10,3 +10,9 @@ TextStyle textfieldLabel = GoogleFonts.inter(
   color: Colors.black87,
   fontWeight: FontWeight.w500,
 );
+TextStyle boutonTexteStyle = GoogleFonts.roboto(
+  fontSize: 14,
+  color: couleurePrincipale,
+  fontWeight: FontWeight.bold,
+);
+TextStyle corpsTexte = GoogleFonts.roboto(fontSize: 14, color: Colors.grey);
