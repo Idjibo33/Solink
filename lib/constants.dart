@@ -1,0 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+const Color couleurePrincipale = Colors.teal;
+final Color couleureSecondaire = Colors.grey[300]!;
+const Color couleureBlancheDark = Colors.white54;
+TextStyle hintText = GoogleFonts.inter(fontSize: 14, color: Colors.black38);
+TextStyle textfieldLabel = GoogleFonts.inter(
+  fontSize: 14,
+  color: Colors.black87,
+  fontWeight: FontWeight.w500,
+);
