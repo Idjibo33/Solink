@@ -24,4 +24,15 @@ class CreationUtilisateur {
       throw Exception(e);
     }
   }
+
+  Future ajouterBio({required String bio}) {
+    final docId = AuthService().currentUser!.uid;
+    try {
+      return firestoreService.collection(userCollection).doc(docId).set({
+        'bio': bio,
+      }, SetOptions(merge: true));
+    } on FirebaseException catch (e) {
+      throw Exception(e);
+    }
+  }
 }

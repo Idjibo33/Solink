@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:so_link/Providers/Auth/connexion_provider.dart';
 import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
 import 'package:so_link/Providers/Auth/inscription_provider.dart';
+import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
+import 'package:so_link/Views/Screens/Authentification/on_boarding_screen.dart';
 import 'package:so_link/auth_gate.dart';
 import 'package:so_link/constants.dart';
 import 'package:so_link/firebase_options.dart';
@@ -17,6 +19,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => ConnexionProvider()),
         ChangeNotifierProvider(create: (context) => InscriptionProvider()),
         ChangeNotifierProvider(create: (context) => DeconnexionProvider()),
+        ChangeNotifierProvider(create: (context) => UtililsateurProvider()),
       ],
       child: MainApp(),
     ),
@@ -33,7 +36,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: couleurePrincipale),
       ),
-      home: AuthGate(),
+      home: OnBoardingScreen(),
     );
   }
 }

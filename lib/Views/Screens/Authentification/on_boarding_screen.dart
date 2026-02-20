@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:so_link/Models/naviguer_feed_screen.dart';
-import 'package:so_link/Views/Widgets/bouton_secondaire.dart';
+import 'package:provider/provider.dart';
+import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
+import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
 import 'package:so_link/Views/Widgets/user_avatar.dart';
 import 'package:so_link/constants.dart';
@@ -38,9 +39,15 @@ class OnBoardingScreen extends StatelessWidget {
                   texteController: textController,
                 ),
                 Gap(20),
-                BoutonSecondaire(
-                  boutonTexte: "Continuer",
-                  action: () => naviguerFeedScreen(context),
+                Consumer<UtililsateurProvider>(
+                  builder: (context, value, child) => BoutonPrincipale(
+                    texteBouton: "Ajouter bio",
+                    action: () => value.ajouterBio(
+                      context: context,
+                      bio: textController.text,
+                    ),
+                    chargement: value.chargement,
+                  ),
                 ),
               ],
             ),

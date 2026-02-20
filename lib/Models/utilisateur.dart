@@ -5,12 +5,14 @@ class UtilisateurModel {
   String nom;
   String prenom;
   String email;
+  String? bio;
   Timestamp creeLe;
   UtilisateurModel({
     required this.id,
     required this.nom,
     required this.prenom,
     required this.email,
+    this.bio,
     required this.creeLe,
   });
   factory UtilisateurModel.fromMap(Map<String, dynamic> map) {
@@ -19,6 +21,7 @@ class UtilisateurModel {
       nom: map['nom'],
       prenom: map['prenom'],
       email: map['email'],
+      bio: map['bio'],
       creeLe: map['creeLe'],
     );
   }
