@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -46,8 +47,8 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA4B0f5PnTu13Kv2VgShj5rhVA60CGV0H0',
+  static final FirebaseOptions web = FirebaseOptions(
+    apiKey: dotenv.env['WebApiKey']!,
     appId: '1:1094348719183:web:6f9dfd1f7935e1ceca163a',
     messagingSenderId: '1094348719183',
     projectId: 'nomadvoyage-2025',
@@ -56,16 +57,16 @@ class DefaultFirebaseOptions {
     measurementId: 'G-VECCZ4L4D5',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA9k3eeHDbcxF2Vt6U4VDQ5rztKHu-L1G8',
+  static final FirebaseOptions android = FirebaseOptions(
+    apiKey: dotenv.env['AndroidApiKey']!,
     appId: '1:1094348719183:android:5ed4aa46f34ed76fca163a',
     messagingSenderId: '1094348719183',
     projectId: 'nomadvoyage-2025',
     storageBucket: 'nomadvoyage-2025.firebasestorage.app',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAT3QtICjfvPUHcGW4hvblH87PnDqFLYP8',
+  static final FirebaseOptions ios = FirebaseOptions(
+    apiKey: dotenv.env['IosApiKey']!,
     appId: '1:1094348719183:ios:65e2972eb92cba27ca163a',
     messagingSenderId: '1094348719183',
     projectId: 'nomadvoyage-2025',

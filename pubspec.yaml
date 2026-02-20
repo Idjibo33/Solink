@@ -8,10 +8,12 @@ environment:
 
 dependencies:
   cloud_firestore: ^6.1.2
+  dotenv: ^4.2.0
   firebase_auth: ^6.1.4
   firebase_core: ^4.4.0
   flutter:
     sdk: flutter
+  flutter_dotenv: ^6.0.0
   gap: ^3.0.1
   google_fonts: ^8.0.2
   provider: ^6.1.5+1
@@ -23,3 +25,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - .env
