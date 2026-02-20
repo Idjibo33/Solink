@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so_link/Models/naviguer_inscription_screen.dart';
+import 'package:so_link/Models/naviguer_on_boarding_screen.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
@@ -45,7 +46,7 @@ class ConnexionScreen extends StatelessWidget {
               ),
               BoutonPrincipale(
                 texteBouton: "S'inscrire",
-                action: () {},
+                action: () => naviguerOnboardingScreen(context),
                 chargement: false,
               ),
 
