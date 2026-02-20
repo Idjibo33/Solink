@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:so_link/constants.dart';
 
 class CustomTextField extends StatelessWidget {
-  final IconData icone;
+  final int? lines;
+  final IconData? icone;
   final String labelTexte;
   final String hintTexte;
   const CustomTextField({
@@ -10,7 +11,8 @@ class CustomTextField extends StatelessWidget {
 
     required this.labelTexte,
     required this.hintTexte,
-    required this.icone,
+    this.icone,
+    this.lines,
   });
 
   @override
@@ -23,6 +25,8 @@ class CustomTextField extends StatelessWidget {
         children: [
           Text(labelTexte, style: textfieldLabel),
           TextField(
+            minLines: lines,
+            maxLines: lines,
             decoration: InputDecoration(
               prefixIcon: Icon(icone, color: Colors.black38),
               hintText: hintTexte,
