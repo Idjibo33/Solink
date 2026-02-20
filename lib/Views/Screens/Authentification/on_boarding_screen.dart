@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:so_link/Views/Widgets/bouton_secondaire.dart';
+import 'package:provider/provider.dart';
+import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
+import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
 import 'package:so_link/Views/Widgets/user_avatar.dart';
 import 'package:so_link/constants.dart';
@@ -10,6 +12,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -33,9 +36,19 @@ class OnBoardingScreen extends StatelessWidget {
                   hintTexte:
                       "Ecrivez une courte bio. ex : Developpeur flutter | passionné par le digital",
                   lines: 5,
+                  texteController: textController,
                 ),
                 Gap(20),
-                BoutonSecondaire(boutonTexte: "Continuer", action: () {}),
+                Consumer<UtililsateurProvider>(
+                  builder: (context, value, child) => BoutonPrincipale(
+                    texteBouton: "Ajouter bio",
+                    action: () => value.ajouterBio(
+                      context: context,
+                      bio: textController.text,
+                    ),
+                    chargement: value.chargement,
+                  ),
+                ),
               ],
             ),
           ),

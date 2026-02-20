@@ -15,6 +15,11 @@ TextStyle enteteTexte = GoogleFonts.roboto(
   color: Colors.black87,
   fontWeight: FontWeight.bold,
 );
+TextStyle titreTexte = GoogleFonts.inter(
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);
+TextStyle postTexte = GoogleFonts.inter();
 TextStyle boutonTexteStyle = GoogleFonts.roboto(
   fontSize: 14,
   color: couleurePrincipale,

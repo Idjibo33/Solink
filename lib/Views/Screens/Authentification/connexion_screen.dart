@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:so_link/Models/naviguer_inscription_screen.dart';
+import 'package:so_link/Providers/Auth/connexion_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
@@ -12,6 +14,8 @@ class ConnexionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final emailController = TextEditingController();
+    final pwController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -33,20 +37,28 @@ class ConnexionScreen extends StatelessWidget {
                         labelTexte: "email",
                         hintTexte: "ex : djiboismaelzeno@gmail.com",
                         icone: Icons.mail,
+                        texteController: emailController,
                       ),
                       PasswordTextField(
                         labelTexte: "Mote de passe",
                         hintTexte: "******",
                         icone: Icons.lock,
+                        texteController: pwController,
                       ),
                     ],
                   ),
                 ),
               ),
-              BoutonPrincipale(
-                texteBouton: "S'inscrire",
-                action: () {},
-                chargement: false,
+              Consumer<ConnexionProvider>(
+                builder: (context, value, child) => BoutonPrincipale(
+                  texteBouton: "Se connecter",
+                  action: () => value.connecterUtilisateur(
+                    context: context,
+                    email: emailController.text,
+                    pw: pwController.text,
+                  ),
+                  chargement: value.chargement,
+                ),
               ),
 
               Row(

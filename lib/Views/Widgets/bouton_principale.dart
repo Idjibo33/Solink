@@ -19,7 +19,7 @@ class BoutonPrincipale extends StatelessWidget {
         onPressed: chargement ? null : action,
         child: chargement
             ? CircularProgressIndicator.adaptive()
-            : Text("bouton"),
+            : Text(texteBouton),
       ),
     );
   }
