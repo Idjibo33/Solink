@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
   final IconData? icone;
   final String labelTexte;
   final String hintTexte;
+  final TextEditingController texteController;
   const CustomTextField({
     super.key,
 
@@ -13,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     required this.hintTexte,
     this.icone,
     this.lines,
+    required this.texteController,
   });
 
   @override
@@ -25,6 +27,7 @@ class CustomTextField extends StatelessWidget {
         children: [
           Text(labelTexte, style: textfieldLabel),
           TextField(
+            controller: texteController,
             minLines: lines,
             maxLines: lines,
             decoration: InputDecoration(

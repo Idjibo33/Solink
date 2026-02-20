@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
 import 'package:so_link/Views/Widgets/new_post_1.dart';
@@ -17,7 +19,9 @@ class FeedScreen extends StatelessWidget {
             borderRadius: BorderRadiusGeometry.circular(26),
           ),
           backgroundColor: couleurePrincipale.withValues(alpha: 0.5),
-          onPressed: () {},
+          onPressed: () => context
+              .read<DeconnexionProvider>()
+              .deconnecterUtilisateur(context),
           child: Icon(Icons.create, color: Colors.white),
         ),
       ),

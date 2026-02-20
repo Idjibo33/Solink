@@ -11,6 +11,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -34,6 +35,7 @@ class OnBoardingScreen extends StatelessWidget {
                   hintTexte:
                       "Ecrivez une courte bio. ex : Developpeur flutter | passionné par le digital",
                   lines: 5,
+                  texteController: textController,
                 ),
                 Gap(20),
                 BoutonSecondaire(
