@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:so_link/Views/Screens/Authentification/connexion_screen.dart';
-import 'package:so_link/Views/Screens/Authentification/on_boarding_screen.dart';
+import 'package:so_link/Views/Screens/Profil/profil_screen.dart';
 import 'package:so_link/constants.dart';
 
 void main() {
@@ -17,7 +16,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: couleurePrincipale),
       ),
-      home: OnBoardingScreen(),
+      home: ProfilScreen(),
     );
   }
 }

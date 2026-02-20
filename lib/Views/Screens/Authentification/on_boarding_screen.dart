@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:so_link/Models/naviguer_feed_screen.dart';
 import 'package:so_link/Views/Widgets/bouton_secondaire.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
 import 'package:so_link/Views/Widgets/user_avatar.dart';
@@ -35,7 +36,10 @@ class OnBoardingScreen extends StatelessWidget {
                   lines: 5,
                 ),
                 Gap(20),
-                BoutonSecondaire(boutonTexte: "Continuer", action: () {}),
+                BoutonSecondaire(
+                  boutonTexte: "Continuer",
+                  action: () => naviguerFeedScreen(context),
+                ),
               ],
             ),
           ),
