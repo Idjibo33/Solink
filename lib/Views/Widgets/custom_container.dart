@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class CustomContainer extends StatelessWidget {
-  final Widget children;
-  const CustomContainer({super.key, required this.children});
+  final Widget child;
+  const CustomContainer({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class CustomContainer extends StatelessWidget {
                 ],
               ),
             ),
-            child: children,
+            child: child,
           ),
         ],
       ),

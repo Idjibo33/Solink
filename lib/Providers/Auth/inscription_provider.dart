@@ -34,10 +34,14 @@ class InscriptionProvider extends ChangeNotifier {
     notifyListeners();
     try {
       await _inscriptionService.inscrireUtilisateur(email.trim(), pw.trim());
-      final userId = AuthService().currentUser!.uid;
+      final userId = AuthService().currentUser?.uid;
       await _docUser.creerDocUser(
         utilisateur: UtilisateurModel(
-          id: userId,
+          bio: "",
+          followers: 0,
+          followings: 0,
+          nombrePosts: 0,
+          id: userId!,
           nom: nom.trim(),
           prenom: prenom.trim(),
           email: email.trim(),

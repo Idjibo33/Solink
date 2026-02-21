@@ -6,6 +6,8 @@ import 'package:so_link/Services/Firebase/Firestore/firestore.dart';
 class CreationUtilisateur {
   final firestoreService = FirestoreService().firestoreService;
   final String userCollection = "users";
+  String? get docId => AuthService().currentUser?.uid;
+
   // Creer docuement user
   Future creerDocUser({required UtilisateurModel utilisateur}) {
     final userData = {
@@ -13,6 +15,10 @@ class CreationUtilisateur {
       'nom': utilisateur.nom,
       'prenom': utilisateur.prenom,
       'email': utilisateur.email,
+      'bio': "",
+      'posts': 0,
+      'followers': 0,
+      'followings': 0,
       'creeLe': utilisateur.creeLe,
     };
     try {
@@ -26,11 +32,25 @@ class CreationUtilisateur {
   }
 
   Future ajouterBio({required String bio}) {
-    final docId = AuthService().currentUser!.uid;
     try {
-      return firestoreService.collection(userCollection).doc(docId).set({
+      return firestoreService.collection(userCollection).doc(docId).update({
         'bio': bio,
-      }, SetOptions(merge: true));
+      });
+    } on FirebaseException catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  //Lire document utilisateur
+  Stream<UtilisateurModel> lireDocUser(String id) {
+    try {
+      return firestoreService
+          .collection(userCollection)
+          .doc(id)
+          .snapshots()
+          .map((snapshot) {
+            return UtilisateurModel.fromMap(snapshot.data()!);
+          });
     } on FirebaseException catch (e) {
       throw Exception(e);
     }

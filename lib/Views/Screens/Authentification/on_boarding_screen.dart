@@ -42,10 +42,12 @@ class OnBoardingScreen extends StatelessWidget {
                 Consumer<UtililsateurProvider>(
                   builder: (context, value, child) => BoutonPrincipale(
                     texteBouton: "Ajouter bio",
-                    action: () => value.ajouterBio(
-                      context: context,
-                      bio: textController.text,
-                    ),
+                    action: () async {
+                      await value.ajouterBio(
+                        context: context,
+                        bio: textController.text,
+                      );
+                    },
                     chargement: value.chargement,
                   ),
                 ),

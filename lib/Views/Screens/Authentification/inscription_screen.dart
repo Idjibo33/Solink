@@ -35,7 +35,7 @@ class InscriptionScreen extends StatelessWidget {
 
                 // Entrée utilisateur
                 CustomContainer(
-                  children: Padding(
+                  child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
                       spacing: 12,

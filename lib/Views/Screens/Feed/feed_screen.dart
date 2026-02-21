@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:so_link/Models/naviguer_profil_screen.dart';
 import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
 import 'package:so_link/Views/Widgets/new_post_1.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
+import 'package:so_link/Views/Widgets/user_avatar.dart';
 import 'package:so_link/constants.dart';
 
 class FeedScreen extends StatelessWidget {
@@ -12,16 +15,16 @@ class FeedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey newPostWidget = GlobalKey();
     return Scaffold(
       floatingActionButton: CustomContainer(
-        children: FloatingActionButton(
+        child: FloatingActionButton(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(26),
           ),
           backgroundColor: couleurePrincipale.withValues(alpha: 0.5),
-          onPressed: () => context
-              .read<DeconnexionProvider>()
-              .deconnecterUtilisateur(context),
+          onPressed: () =>
+              Scrollable.ensureVisible(newPostWidget.currentContext!),
           child: Icon(Icons.create, color: Colors.white),
         ),
       ),
@@ -34,7 +37,7 @@ class FeedScreen extends StatelessWidget {
               title: FittedBox(
                 child: Row(
                   children: [
-                    LogoWidget(padding: 8, size: 16),
+                    LogoWidget(padding: 8, size: 18),
                     Text(
                       "SoLink",
                       style: enteteTexte.copyWith(
@@ -47,10 +50,17 @@ class FeedScreen extends StatelessWidget {
                 ),
               ),
               floating: true,
-
               snap: true,
+              actions: [
+                GestureDetector(
+                  onTap: () => naviguerProfilScreen(context),
+                  child: UserAvatar(size: 24),
+                ),
+                Gap(18),
+              ],
             ),
             SliverToBoxAdapter(
+              key: newPostWidget,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 18.0,
@@ -59,7 +69,7 @@ class FeedScreen extends StatelessWidget {
                 child: NewPost1(),
               ),
             ),
-            SliverList.builder(itemBuilder: (context, index) => PostWidget()),
+            /*  SliverList.builder(itemBuilder: (context, index) => PostWidget()),*/
           ],
         ),
       ),

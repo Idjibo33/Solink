@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:so_link/Models/SnackBars/error_snackbar.dart';
 import 'package:so_link/Models/SnackBars/succes_snackbar.dart';
-import 'package:so_link/Models/naviguer_feed_screen.dart';
+import 'package:so_link/Models/naviguer_auth_gate.dart';
+import 'package:so_link/Models/utilisateur.dart';
+import 'package:so_link/Services/Firebase/Auth/auth.dart';
 import 'package:so_link/Services/Firebase/Firestore/creation_utilisateur.dart';
 
 class UtililsateurProvider extends ChangeNotifier {
   final _utilisateurServices = CreationUtilisateur();
+  CreationUtilisateur get utilisateurServices => CreationUtilisateur();
+
+  String? get docId => AuthService().currentUser?.uid;
+
+  Stream<UtilisateurModel> get userData =>
+      _utilisateurServices.lireDocUser(docId!);
   bool _chargement = false;
   String _messsage = "";
   bool get chargement => _chargement;
@@ -27,10 +35,9 @@ class UtililsateurProvider extends ChangeNotifier {
       _chargement = false;
       _messsage = "bio ajouté avec succès";
       notifyListeners();
-
       if (context.mounted) {
         showSucces(context: context, message: _messsage);
-        naviguerFeedScreen(context);
+        naviguerAuthGate(context);
       }
     } catch (e) {
       _chargement = false;

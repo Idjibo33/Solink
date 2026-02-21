@@ -28,7 +28,7 @@ class ConnexionScreen extends StatelessWidget {
               LogoWidget(padding: 16, size: 50),
               // Entrée utilisateur
               CustomContainer(
-                children: Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
                     spacing: 12,
