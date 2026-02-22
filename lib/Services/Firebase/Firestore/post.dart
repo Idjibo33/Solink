@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:so_link/Models/commentaire.dart';
 import 'package:so_link/Models/post.dart';
 import 'package:so_link/Services/Firebase/Auth/auth.dart';
 import 'package:so_link/Services/Firebase/Firestore/creation_utilisateur.dart';
@@ -7,6 +8,7 @@ import 'package:so_link/Services/Firebase/Firestore/firestore.dart';
 class Post {
   final firestore = FirestoreService().firestoreService;
   final String posteCollection = "posts";
+  final String commentaireCollection = "comment";
   String get userId => AuthService().currentUser!.uid;
   String get userCollection => CreationUtilisateur().userCollection;
   // Creer un post
@@ -58,12 +60,32 @@ class Post {
     }
   }
 
-  // Ajouter like
+  // Enlever like
   Future removeLike(String docId) {
     try {
       return firestore.collection(posteCollection).doc(docId).update({
         'likes': FieldValue.arrayRemove([userId]),
       });
+    } on FirebaseException catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  // Ajouter commentaire au post
+  Future addComment(Commentaire commentaire, String postId) {
+    try {
+      final comment = firestore
+          .collection(posteCollection)
+          .doc(postId)
+          .collection(commentaireCollection)
+          .doc();
+      final commentdata = {
+        'id': comment.id,
+        'content': commentaire.content,
+        'creeLe': commentaire.creeLe,
+        'userId': userId,
+      };
+      return comment.set(commentdata);
     } on FirebaseException catch (e) {
       throw Exception(e);
     }
