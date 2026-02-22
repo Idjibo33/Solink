@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +5,6 @@ import 'package:so_link/Models/commentaire.dart';
 import 'package:so_link/Models/post.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Views/Widgets/commentaire_widget.dart';
-import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
 import 'package:so_link/constants.dart';
 
@@ -36,10 +33,32 @@ class _CommentairesScreenState extends State<CommentairesScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             PostWidget(post: widget.post),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 2,
-                itemBuilder: (context, index) => CommentaireWidget(),
+            Consumer<PostsProvider>(
+              builder: (context, value, child) => StreamBuilder(
+                stream: value.readcomments(
+                  context: context,
+                  docId: widget.post.id,
+                ),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(child: Text(snapshot.error.toString()));
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    Center(child: CircularProgressIndicator.adaptive());
+                  }
+                  if (snapshot.hasData && snapshot.data == null) {
+                    return Center(
+                      child: Text("Aucun commentaire pour ce post"),
+                    );
+                  }
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) =>
+                          CommentaireWidget(commentaire: snapshot.data![index]),
+                    ),
+                  );
+                },
               ),
             ),
             SizedBox(

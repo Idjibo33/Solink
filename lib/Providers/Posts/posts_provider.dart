@@ -59,4 +59,18 @@ class PostsProvider extends ChangeNotifier {
       if (context.mounted) showError(context: context, message: _messsage);
     }
   }
+
+  // lire les commentaire du post
+  Stream<List<Commentaire>>? readcomments({
+    required BuildContext context,
+    required docId,
+  }) {
+    try {
+      return _postsServices.readPostComments(docId);
+    } catch (e) {
+      _messsage = e.toString();
+      notifyListeners();
+      if (context.mounted) showError(context: context, message: _messsage);
+    }
+  }
 }

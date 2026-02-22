@@ -38,6 +38,7 @@ class Post {
       return firestore
           .collection(posteCollection)
           .where('userId', isEqualTo: userId)
+          .orderBy('creeLe', descending: true)
           .snapshots()
           .map(
             (event) => event.docs.map((e) {
@@ -86,6 +87,25 @@ class Post {
         'userId': userId,
       };
       return comment.set(commentdata);
+    } on FirebaseException catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  // Lire les commentaire du post
+  Stream<List<Commentaire>>? readPostComments(String docId) {
+    try {
+      return firestore
+          .collection(posteCollection)
+          .doc(docId)
+          .collection(commentaireCollection)
+          .orderBy('creeLe', descending: true)
+          .snapshots()
+          .map(
+            (event) => event.docs.map((e) {
+              return Commentaire.fromMap(e.data());
+            }).toList(),
+          );
     } on FirebaseException catch (e) {
       throw Exception(e);
     }
