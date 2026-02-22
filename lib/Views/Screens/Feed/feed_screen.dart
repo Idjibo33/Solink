@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/naviguer_profil_screen.dart';
-import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
+import 'package:so_link/Providers/Navigation/navigation_bar_provider.dart';
+import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
 import 'package:so_link/Views/Widgets/new_post_1.dart';
@@ -15,6 +16,7 @@ class FeedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final postProvider = context.watch<PostsProvider>();
     final GlobalKey newPostWidget = GlobalKey();
     return Scaffold(
       floatingActionButton: CustomContainer(
@@ -69,23 +71,34 @@ class FeedScreen extends StatelessWidget {
                 child: NewPost1(),
               ),
             ),
-            /*  SliverList.builder(itemBuilder: (context, index) => PostWidget()),*/
+            StreamBuilder(
+              stream: postProvider.posts,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return SliverToBoxAdapter(
+                    child: Center(child: Text(snapshot.error.toString())),
+                  );
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return SliverToBoxAdapter(
+                    child: Center(child: CircularProgressIndicator.adaptive()),
+                  );
+                }
+                if (snapshot.hasData && snapshot.data == null) {
+                  return SliverToBoxAdapter(
+                    child: Center(child: Text("Aucun post trouvé")),
+                  );
+                }
+                return SliverList.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) =>
+                      PostWidget(post: snapshot.data![index]),
+                );
+              },
+            ),
           ],
         ),
       ),
     );
   }
 }
-/* RefreshIndicator(
-        onRefresh: () => Future.delayed(Duration(seconds: 2)),
-        child: Column(
-          children: [
-            NewPost1(),
-            Expanded(
-              child: ListView.builder(
-                itemBuilder: (context, index) => PostWidget(),
-              ),
-            ),
-          ],
-        ),
-      )*/

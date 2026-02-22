@@ -40,24 +40,23 @@ class _CommentairesScreenState extends State<CommentairesScreen> {
                   docId: widget.post.id,
                 ),
                 builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return Center(child: Text(snapshot.error.toString()));
-                  }
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     Center(child: CircularProgressIndicator.adaptive());
                   }
-                  if (snapshot.hasData && snapshot.data == null) {
-                    return Center(
-                      child: Text("Aucun commentaire pour ce post"),
+                  if (snapshot.hasData && snapshot.data != null) {
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: snapshot.data?.length,
+                        itemBuilder: (context, index) => CommentaireWidget(
+                          commentaire: snapshot.data![index],
+                        ),
+                      ),
                     );
                   }
-                  return Expanded(
-                    child: ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) =>
-                          CommentaireWidget(commentaire: snapshot.data![index]),
-                    ),
-                  );
+                  if (snapshot.data == null) {
+                    return Center(child: Text("Aucun commentaire trouvé"));
+                  }
+                  return Center(child: Text(snapshot.error.toString()));
                 },
               ),
             ),

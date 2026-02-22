@@ -18,13 +18,8 @@ class CommentaireWidget extends StatelessWidget {
     final date = gererTimeStamp(commentaire.creeLe);
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: 130,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: couleureBlancheDark,
-          borderRadius: BorderRadius.circular(16),
-        ),
+      child: Card(
+        elevation: 0,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

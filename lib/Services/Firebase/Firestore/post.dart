@@ -32,6 +32,23 @@ class Post {
     }
   }
 
+  // Lire tous les posts de l'utilisateur
+  Stream<List<PostModel>>? readPosts() {
+    try {
+      return firestore
+          .collection(posteCollection)
+          .orderBy('creeLe', descending: true)
+          .snapshots()
+          .map(
+            (event) => event.docs.map((e) {
+              return PostModel.fromMap(e.data());
+            }).toList(),
+          );
+    } on FirebaseException catch (e) {
+      throw Exception(e);
+    }
+  }
+
   // Lire les posts de l'utilisateur
   Stream<List<PostModel>>? lirePostUser() {
     try {

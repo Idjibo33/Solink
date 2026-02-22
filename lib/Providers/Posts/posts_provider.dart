@@ -10,6 +10,10 @@ class PostsProvider extends ChangeNotifier {
   bool _chargement = false;
   String _messsage = "";
   bool get chargement => _chargement;
+  //Tous les posts
+  Stream<List<PostModel>>? get posts => _postsServices.readPosts();
+
+  // Les postes de l'utilisateurs
   Stream<List<PostModel>>? get userPosts => _postsServices.lirePostUser();
   //Ajouter le poste
   Future ajouterPost({
@@ -71,6 +75,7 @@ class PostsProvider extends ChangeNotifier {
       _messsage = e.toString();
       notifyListeners();
       if (context.mounted) showError(context: context, message: _messsage);
+      return null;
     }
   }
 }
