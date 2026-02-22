@@ -50,7 +50,7 @@ class ProfilScreen extends StatelessWidget {
                       userId: snapshot.data![index].userId,
                       content: snapshot.data![index].content,
                       creeLe: snapshot.data![index].creeLe,
-                      likes: [],
+                      likes: snapshot.data![index].likes,
                     ),
                   ),
                 );

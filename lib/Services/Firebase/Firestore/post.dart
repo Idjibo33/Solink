@@ -47,11 +47,22 @@ class Post {
     }
   }
 
-  // Liker post
-  Future likePost(String docId) {
+  // Ajouter like
+  Future addLike(String docId) {
     try {
       return firestore.collection(posteCollection).doc(docId).update({
         'likes': FieldValue.arrayUnion([userId]),
+      });
+    } on FirebaseException catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  // Ajouter like
+  Future removeLike(String docId) {
+    try {
+      return firestore.collection(posteCollection).doc(docId).update({
+        'likes': FieldValue.arrayRemove([userId]),
       });
     } on FirebaseException catch (e) {
       throw Exception(e);

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:so_link/Models/gerer_timestamp.dart';
 import 'package:so_link/Models/post.dart';
+import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_like.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
@@ -15,6 +17,7 @@ class PostWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final postDate = gererTimeStamp(post.creeLe);
     final userProvider = UtililsateurProvider().utilisateurServices;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: CustomContainer(
@@ -65,7 +68,12 @@ class PostWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      BoutonLike(postId: post.id),
+                      BoutonLike(
+                        likes: post.likes,
+                        docId: post.id,
+                        userId: userProvider.docId!,
+                      ),
+
                       Text(post.likes.length.toString()),
                     ],
                   ),
