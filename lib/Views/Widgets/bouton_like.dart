@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so_link/Services/Firebase/Firestore/post.dart';
+import 'package:so_link/constants.dart';
 
 class BoutonLike extends StatefulWidget {
   final List likes;
@@ -29,10 +30,8 @@ class _BoutonLikeState extends State<BoutonLike> {
     void changerReaction() {
       if (isLiked) {
         Post().removeLike(widget.docId);
-        print("removed");
       } else {
         Post().addLike(widget.docId);
-        print("added");
       }
     }
 
@@ -41,10 +40,12 @@ class _BoutonLikeState extends State<BoutonLike> {
         changerReaction();
         setState(() {
           isLiked = !isLiked;
-          print('printed');
         });
       },
-      icon: Icon(isLiked ? Icons.favorite : Icons.favorite_border),
+      icon: Icon(
+        isLiked ? Icons.favorite : Icons.favorite_border,
+        color: couleurePrincipale.withValues(alpha: 0.5),
+      ),
     );
   }
 }

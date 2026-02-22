@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:so_link/Models/SnackBars/error_snackbar.dart';
 import 'package:so_link/Models/SnackBars/succes_snackbar.dart';
 import 'package:so_link/Models/post.dart';
-import 'package:so_link/Services/Firebase/Auth/auth.dart';
 import 'package:so_link/Services/Firebase/Firestore/post.dart';
 
 class PostsProvider extends ChangeNotifier {
@@ -11,8 +10,6 @@ class PostsProvider extends ChangeNotifier {
   String _messsage = "";
   bool get chargement => _chargement;
   Stream<List<PostModel>>? get userPosts => _postsServices.lirePostUser();
-  bool _isLiked = false;
-  bool get isLiked => _isLiked;
   //Ajouter le poste
   Future ajouterPost({
     required BuildContext context,

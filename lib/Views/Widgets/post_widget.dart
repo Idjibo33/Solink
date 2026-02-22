@@ -80,9 +80,9 @@ class PostWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: Icon(
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
                           Icons.comment,
                           color: couleurePrincipale.withValues(alpha: 0.5),
                         ),
