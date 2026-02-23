@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UtilisateurModel {
-  String id;
-  String nom;
-  String prenom;
-  String email;
-  String bio;
+  final String id;
+  final String nom;
+  final String prenom;
+  final String email;
+  final String bio;
   int nombrePosts;
   int followers;
   int followings;

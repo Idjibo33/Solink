@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/naviguer_profil_screen.dart';
-import 'package:so_link/Providers/Navigation/navigation_bar_provider.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';

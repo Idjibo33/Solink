@@ -5,7 +5,7 @@ import 'package:so_link/Models/post.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Views/Widgets/simple_text_field.dart';
 
 class NewPost1 extends StatelessWidget {
   const NewPost1({super.key});
@@ -22,20 +22,9 @@ class NewPost1 extends StatelessWidget {
               spacing: 8,
               children: [
                 SizedBox(
-                  child: TextField(
+                  child: SimpleTextField(
+                    hint: "Qu'avez-vous en tête ?",
                     controller: texteController,
-                    minLines: 1,
-                    maxLines: 3,
-                    decoration: InputDecoration(
-                      hintText: "Qu'avez-vous en tête ?",
-                      hintStyle: hintText,
-                      filled: true,
-                      fillColor: couleureSecondaire,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                    ),
                   ),
                 ),
                 BoutonPrincipale(

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:so_link/Providers/Auth/connexion_provider.dart';
 import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
 import 'package:so_link/Providers/Auth/inscription_provider.dart';
-import 'package:so_link/Providers/Navigation/navigation_bar_provider.dart';
+import 'package:so_link/Providers/Chats/chat_provider.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/auth_gate.dart';
@@ -24,7 +24,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => DeconnexionProvider()),
         ChangeNotifierProvider(create: (context) => UtililsateurProvider()),
         ChangeNotifierProvider(create: (context) => PostsProvider()),
-        ChangeNotifierProvider(create: (context) => NavigationBarProvider()),
+        ChangeNotifierProvider(create: (context) => ChatProvider()),
       ],
       child: MainApp(),
     ),

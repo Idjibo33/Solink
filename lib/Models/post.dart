@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PostModel {
-  String id;
-  String userId;
-  String content;
-  List likes;
-  Timestamp creeLe;
+  final String id;
+  final String userId;
+  final String content;
+  final List likes;
+  final Timestamp creeLe;
   PostModel({
     required this.id,
     required this.userId,

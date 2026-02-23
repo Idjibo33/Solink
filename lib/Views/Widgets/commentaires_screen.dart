@@ -6,6 +6,7 @@ import 'package:so_link/Models/post.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Views/Widgets/commentaire_widget.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
+import 'package:so_link/Views/Widgets/simple_text_field.dart';
 import 'package:so_link/constants.dart';
 
 class CommentairesScreen extends StatefulWidget {
@@ -64,18 +65,9 @@ class _CommentairesScreenState extends State<CommentairesScreen> {
               child: Row(
                 children: [
                   Expanded(
-                    child: TextField(
+                    child: SimpleTextField(
                       controller: textController,
-                      decoration: InputDecoration(
-                        hintText: "Ajouter un commentaire",
-                        hintStyle: hintText,
-                        filled: true,
-                        fillColor: couleureSecondaire,
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                      ),
+                      hint: "ajouter un commentaire",
                     ),
                   ),
                   Consumer<PostsProvider>(
