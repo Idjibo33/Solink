@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/post.dart';
+import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Views/Screens/Profil/profil_statistique.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
@@ -19,6 +21,15 @@ class ProfilScreen extends StatelessWidget {
               floating: true,
               snap: true,
               title: Text("Profile"),
+              actions: [
+                Consumer<DeconnexionProvider>(
+                  builder: (context, value, child) => IconButton(
+                    onPressed: () => value.deconnecterUtilisateur(context),
+                    icon: Icon(Icons.logout),
+                  ),
+                ),
+                Gap(8),
+              ],
               bottom: PreferredSize(
                 preferredSize: Size.fromHeight(300),
                 child: ProfilStatistique(),

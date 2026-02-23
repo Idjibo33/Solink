@@ -38,7 +38,6 @@ class UtililsateurProvider extends ChangeNotifier {
       notifyListeners();
       if (context.mounted) {
         showSucces(context: context, message: _messsage);
-        naviguerAuthGate(context);
       }
     } catch (e) {
       _chargement = false;

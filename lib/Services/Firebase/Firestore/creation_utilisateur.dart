@@ -46,6 +46,7 @@ class CreationUtilisateur {
     try {
       return firestoreService
           .collection(userCollection)
+          .where('id', isNotEqualTo: docId)
           .snapshots()
           .map(
             (event) => event.docs.map((e) {

@@ -8,7 +8,6 @@ import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
 import 'package:so_link/Views/Widgets/new_post_1.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
-import 'package:so_link/Views/Widgets/user_avatar.dart';
 import 'package:so_link/constants.dart';
 
 class FeedScreen extends StatelessWidget {
