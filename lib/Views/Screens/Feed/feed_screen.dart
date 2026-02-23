@@ -53,13 +53,6 @@ class FeedScreen extends StatelessWidget {
               ),
               floating: true,
               snap: true,
-              actions: [
-                GestureDetector(
-                  onTap: () => naviguerProfilScreen(context),
-                  child: UserAvatar(size: 24),
-                ),
-                Gap(18),
-              ],
             ),
             SliverToBoxAdapter(
               key: newPostWidget,
