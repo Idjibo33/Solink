@@ -41,6 +41,22 @@ class CreationUtilisateur {
     }
   }
 
+  // Lire les utilisateurs
+  Stream<List<UtilisateurModel>>? users() {
+    try {
+      return firestoreService
+          .collection(userCollection)
+          .snapshots()
+          .map(
+            (event) => event.docs.map((e) {
+              return UtilisateurModel.fromMap(e.data());
+            }).toList(),
+          );
+    } on FirebaseException catch (e) {
+      throw Exception(e);
+    }
+  }
+
   //Lire document utilisateur
   Stream<UtilisateurModel> lireDocUser(String id) {
     try {

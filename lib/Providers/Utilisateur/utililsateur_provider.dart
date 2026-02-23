@@ -9,6 +9,7 @@ import 'package:so_link/Services/Firebase/Firestore/creation_utilisateur.dart';
 class UtililsateurProvider extends ChangeNotifier {
   final _utilisateurServices = CreationUtilisateur();
   CreationUtilisateur get utilisateurServices => CreationUtilisateur();
+  Stream<List<UtilisateurModel>>? get users => _utilisateurServices.users();
 
   String? get docId => AuthService().currentUser?.uid;
 

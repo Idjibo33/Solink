@@ -4,6 +4,7 @@ import 'package:so_link/Providers/Navigation/navigation_bar_provider.dart';
 import 'package:so_link/Views/Screens/Chats/chats_screen.dart';
 import 'package:so_link/Views/Screens/Feed/feed_screen.dart';
 import 'package:so_link/Views/Screens/Profil/profil_screen.dart';
+import 'package:so_link/constants.dart';
 
 class Navigation extends StatelessWidget {
   const Navigation({super.key});
@@ -16,6 +17,9 @@ class Navigation extends StatelessWidget {
         body: pages.elementAt(value.pageIndex),
         bottomNavigationBar: Consumer<NavigationBarProvider>(
           builder: (context, value, child) => BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            selectedLabelStyle: titreTexte,
+            unselectedLabelStyle: corpsTexte,
             currentIndex: value.pageIndex,
             onTap: (indexValue) => value.naviguer(indexValue),
             items: [
