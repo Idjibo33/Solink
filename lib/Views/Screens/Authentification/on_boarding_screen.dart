@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:so_link/Models/naviguer_auth_gate.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
+import 'package:so_link/Views/Widgets/navigation.dart';
 import 'package:so_link/Views/Widgets/user_avatar.dart';
+import 'package:so_link/auth_gate.dart';
 import 'package:so_link/constants.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -47,6 +50,7 @@ class OnBoardingScreen extends StatelessWidget {
                         context: context,
                         bio: textController.text,
                       );
+                      if (context.mounted) naviguerAuthGate(context);
                     },
                     chargement: value.chargement,
                   ),

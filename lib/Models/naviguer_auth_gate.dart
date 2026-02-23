@@ -6,13 +6,15 @@ import 'package:so_link/auth_gate.dart';
 
 void naviguerAuthGate(BuildContext context) {
   if (Platform.isIOS) {
-    Navigator.pushReplacement(
+    Navigator.pushAndRemoveUntil(
       context,
       CupertinoPageRoute(builder: (context) => AuthGate()),
+      (Route route) => false,
     );
   }
-  Navigator.pushReplacement(
+  Navigator.pushAndRemoveUntil(
     context,
     MaterialPageRoute(builder: (context) => AuthGate()),
+    (Route route) => false,
   );
 }
