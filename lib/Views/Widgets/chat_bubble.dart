@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/chat.dart';
@@ -13,15 +14,17 @@ class ChatBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentUserId = context.watch<UtililsateurProvider>().docId;
     bool isMe = chat.senderId == currentUserId;
-    final date = gererTimeStamp(chat.envoyeLe);
+    String date = gererTimeStamp(chat.envoyeLe ?? Timestamp.now());
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 8),
       child: Container(
-        color: isMe ? couleurePrincipale : couleureSecondaire,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: isMe
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.start,
             children: [
               Text(chat.content, style: titreTexte),
               Text(date, style: corpsTexte),
