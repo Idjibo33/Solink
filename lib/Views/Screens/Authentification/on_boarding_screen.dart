@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/naviguer_auth_gate.dart';
+import 'package:so_link/Models/textfield.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
@@ -33,11 +34,13 @@ class OnBoardingScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 CustomTextField(
-                  labelTexte: "Bio",
-                  hintTexte:
-                      "Ecrivez une courte bio. ex : Developpeur flutter | passionné par le digital",
-                  lines: 5,
-                  texteController: textController,
+                  values: TextfieldModel(
+                    lines: 5,
+                    hintTexte:
+                        "ex : Developpeur flutter | passionné par le digital",
+                    labelTexte: "Bio",
+                    texteController: textController,
+                  ),
                 ),
                 Gap(20),
                 Consumer<UtililsateurProvider>(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/naviguer_inscription_screen.dart';
+import 'package:so_link/Models/textfield.dart';
 import 'package:so_link/Providers/Auth/connexion_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
@@ -34,10 +35,12 @@ class ConnexionScreen extends StatelessWidget {
                     spacing: 12,
                     children: [
                       CustomTextField(
-                        labelTexte: "email",
-                        hintTexte: "ex : djiboismaelzeno@gmail.com",
-                        icone: Icons.mail,
-                        texteController: emailController,
+                        values: TextfieldModel(
+                          icone: Icons.mail,
+                          hintTexte: "ex : djiboismaelzeno@gmail.com",
+                          labelTexte: "email",
+                          texteController: emailController,
+                        ),
                       ),
                       PasswordTextField(
                         labelTexte: "Mote de passe",

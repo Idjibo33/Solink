@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:so_link/Models/textfield.dart';
 import 'package:so_link/constants.dart';
 
 class CustomTextField extends StatelessWidget {
-  final int? lines;
-  final IconData? icone;
-  final String labelTexte;
-  final String hintTexte;
-  final TextEditingController texteController;
-  const CustomTextField({
-    super.key,
-
-    required this.labelTexte,
-    required this.hintTexte,
-    this.icone,
-    this.lines,
-    required this.texteController,
-  });
+  final TextfieldModel values;
+  const CustomTextField({super.key, required this.values});
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +14,15 @@ class CustomTextField extends StatelessWidget {
         spacing: 8,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(labelTexte, style: textfieldLabel),
+          Text(values.labelTexte, style: textfieldLabel),
           TextField(
-            controller: texteController,
-            minLines: lines,
-            maxLines: lines,
+            controller: values.texteController,
+            minLines: values.lines,
+            maxLines: values.lines,
             decoration: InputDecoration(
-              prefixIcon: Icon(icone, color: Colors.black38),
-              hintText: hintTexte,
-              hintStyle: hintText,
+              prefixIcon: Icon(values.icone, color: Colors.black38),
+              hintText: values.hintTexte,
+              hintStyle: hintTextStyle,
               filled: true,
               fillColor: couleureSecondaire,
               border: OutlineInputBorder(

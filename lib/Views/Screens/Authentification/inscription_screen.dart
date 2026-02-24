@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:so_link/Models/textfield.dart';
 import 'package:so_link/Providers/Auth/inscription_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
@@ -41,22 +42,28 @@ class InscriptionScreen extends StatelessWidget {
                       spacing: 12,
                       children: [
                         CustomTextField(
-                          labelTexte: "Nom",
-                          hintTexte: "ex : Djibo Adamou",
-                          icone: Icons.person,
-                          texteController: nomController,
+                          values: TextfieldModel(
+                            icone: Icons.person,
+                            hintTexte: "ex : Djibo Adamou",
+                            labelTexte: "Nom",
+                            texteController: nomController,
+                          ),
                         ),
                         CustomTextField(
-                          labelTexte: "Prenom",
-                          hintTexte: "ex : Ismael",
-                          icone: Icons.person,
-                          texteController: prenomController,
+                          values: TextfieldModel(
+                            icone: Icons.person,
+                            hintTexte: "ex : Ismael",
+                            labelTexte: "Prenom",
+                            texteController: prenomController,
+                          ),
                         ),
                         CustomTextField(
-                          labelTexte: "email",
-                          hintTexte: "ex : djiboismaelzeno@gmail.com",
-                          icone: Icons.mail,
-                          texteController: emailController,
+                          values: TextfieldModel(
+                            icone: Icons.mail,
+                            hintTexte: "ex : djiboismaelzeno@gmail.com",
+                            labelTexte: "email",
+                            texteController: emailController,
+                          ),
                         ),
                         PasswordTextField(
                           labelTexte: "Mot de passe",

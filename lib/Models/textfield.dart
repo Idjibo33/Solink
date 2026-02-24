@@ -7,8 +7,8 @@ class TextfieldModel {
   String hintTexte;
   TextEditingController texteController;
   TextfieldModel({
-    required this.lines,
-    required this.icone,
+    this.lines,
+    this.icone,
     required this.hintTexte,
     required this.labelTexte,
     required this.texteController,
