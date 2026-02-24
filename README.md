@@ -14,22 +14,22 @@ L'objectif est l'apprentissage des opérations CRUD avec firebase en utilisant f
 
 ## Structure du Projet
 
-lib/
-├── Models/        # Constantes,Navigators ,thèmes,Modèles de données (PostModel,Chat,Commentaire,TextfieldModel,UtilisateurModel)
-├── Providers/     # Provider
-├── Services/      # Logique Firebase (Auth, Firestore)
-├── Views/         # Écrans et composants UI
-└── main.dart      # Point d'entrée
+- **lib/**
+  - Models/         Constantes,Navigators ,thèmes,Modèles de données ***(PostModel,Chat,Commentaire,TextfieldModel,UtilisateurModel)***
+  - Providers/      Provider
+  - Services/       Logique Firebase (Auth, Firestore)
+  - Views/          Écrans et composants UI
+  - main.dart       Point d'entrée
 
 
 ## Custom widgets
-['CustomTextField: '](lib/Views/Widgets/custom_text_field.dart)
-['PasswordTextField: '](lib/Views/Widgets/password_text_field.dart)
-['Like bouton: '](lib/Views/Widgets/custom_text_field.dart)
-['Bouton principale: '](lib/Views/Widgets/bouton_principale.dart)
-['Chat bubble: '](lib/Views/Widgets/chat_bubble.dart)
-['Custom Container: '](lib/Views/Widgets/bouton_secondaire.dart)
-['Logo: '](lib/Views/Widgets/logo_widget.dart)
+- ## CustomTextField ['CustomTextField: '](lib/Views/Widgets/custom_text_field.dart)
+- ## PasswordTextField ['PasswordTextField: '](lib/Views/Widgets/password_text_field.dart)
+- ## Like bouton ['Like bouton: '](lib/Views/Widgets/custom_text_field.dart)
+- ## Bouton principale ['Bouton principale: '](lib/Views/Widgets/bouton_principale.dart)
+- ## Chat bubble ['Chat bubble: '](lib/Views/Widgets/chat_bubble.dart)
+- ## Custom Container ['Custom Container: '](lib/Views/Widgets/bouton_secondaire.dart)
+- ## Logo['Logo: '](lib/Views/Widgets/logo_widget.dart)
 ....
 
 ## Aperću 
