@@ -79,7 +79,6 @@ class InscriptionScreen extends StatelessWidget {
                   builder: (context, value, child) => BoutonPrincipale(
                     texteBouton: "S'inscrire",
                     action: () => value.inscrireUtilisateur(
-                      context: context,
                       nom: nomController.text,
                       prenom: prenomController.text,
                       email: emailController.text,

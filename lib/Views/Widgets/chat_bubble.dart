@@ -12,7 +12,7 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentUserId = context.watch<UtililsateurProvider>().docId;
+    final currentUserId = context.watch<UtililsateurProvider>().id;
     bool isMe = chat.senderId == currentUserId;
     String date = gererTimeStamp(chat.envoyeLe ?? Timestamp.now());
     return Padding(

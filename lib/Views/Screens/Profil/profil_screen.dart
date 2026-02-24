@@ -4,9 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:so_link/Models/post.dart';
 import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
+import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Screens/Profil/profil_statistique.dart';
 import 'package:so_link/Views/Widgets/loading_widget.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
+import 'package:so_link/constants.dart';
 
 class ProfilScreen extends StatelessWidget {
   const ProfilScreen({super.key});
@@ -14,6 +16,7 @@ class ProfilScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final postsProvider = context.watch<PostsProvider>();
+    final user = context.watch<UtililsateurProvider>().id;
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -25,7 +28,7 @@ class ProfilScreen extends StatelessWidget {
               actions: [
                 Consumer<DeconnexionProvider>(
                   builder: (context, value, child) => IconButton(
-                    onPressed: () => value.deconnecterUtilisateur(context),
+                    onPressed: () => value.deconnecterUtilisateur(),
                     icon: Icon(Icons.logout),
                   ),
                 ),
@@ -37,7 +40,10 @@ class ProfilScreen extends StatelessWidget {
               ),
             ),
             StreamBuilder(
-              stream: postsProvider.userPosts,
+              stream: postsProvider.getUserPosts(
+                userId: user!,
+                context: context,
+              ),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return SliverToBoxAdapter(
@@ -49,13 +55,17 @@ class ProfilScreen extends StatelessWidget {
                 }
                 if (snapshot.hasData && snapshot.data!.isEmpty) {
                   return SliverToBoxAdapter(
-                    child: Center(child: Text("Aucun document trouvé")),
+                    child: Center(
+                      child: Text("Aucun document trouvé", style: corpsTexte),
+                    ),
                   );
                 }
                 return SliverList.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) => PostWidget(
                     post: PostModel(
+                      comments: snapshot.data![index].comments,
+                      userName: snapshot.data![index].userName,
                       id: snapshot.data![index].id,
                       userId: snapshot.data![index].userId,
                       content: snapshot.data![index].content,

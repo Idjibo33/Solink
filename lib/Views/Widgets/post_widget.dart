@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:so_link/Models/gerer_timestamp.dart';
 import 'package:so_link/Models/post.dart';
-import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
-import 'package:so_link/Views/Widgets/bouton_like.dart';
-import 'package:so_link/Views/Widgets/commentaires_screen.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
-import 'package:so_link/Views/Widgets/loading_widget.dart';
-import 'package:so_link/Views/Widgets/user_avatar.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Views/Widgets/post_reaction_widget.dart';
+import 'package:so_link/Views/Widgets/post_user_infos.dart';
 
 class PostWidget extends StatelessWidget {
   final PostModel post;
@@ -15,9 +10,6 @@ class PostWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final postDate = gererTimeStamp(post.creeLe);
-    final userProvider = UtililsateurProvider().utilisateurServices;
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: CustomContainer(
@@ -27,75 +19,9 @@ class PostWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 8,
             children: [
-              Row(
-                spacing: 8,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  UserAvatar(size: 25),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      StreamBuilder(
-                        stream: userProvider.lireDocUser(post.userId),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return Text(snapshot.error.toString());
-                          }
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return LoadingWidget();
-                          }
-                          return Text(
-                            snapshot.data!.nom,
-                            style: titreTexte,
-                            textAlign: TextAlign.start,
-                          );
-                        },
-                      ),
-
-                      Text(postDate.toString(), style: corpsTexte),
-                    ],
-                  ),
-                ],
-              ),
+              PostUserInfos(post: post),
               Text(post.content),
-
-              Row(
-                spacing: 8,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      BoutonLike(
-                        likes: post.likes,
-                        docId: post.id,
-                        userId: userProvider.docId!,
-                      ),
-
-                      Text(post.likes.length.toString()),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      IconButton(
-                        onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                CommentairesScreen(post: post),
-                          ),
-                        ),
-                        icon: Icon(
-                          Icons.comment,
-                          color: couleurePrincipale.withValues(alpha: 0.5),
-                        ),
-                      ),
-                      Text("1"),
-                    ],
-                  ),
-                ],
-              ),
+              PostReactionWidget(post: post),
             ],
           ),
         ),

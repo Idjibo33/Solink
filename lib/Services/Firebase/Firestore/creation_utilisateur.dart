@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:so_link/Models/utilisateur.dart';
-import 'package:so_link/Services/Firebase/Auth/auth.dart';
 import 'package:so_link/Services/Firebase/Firestore/firestore.dart';
 
 class CreationUtilisateur {
   final firestoreService = FirestoreService().firestoreService;
   final String userCollection = "users";
-  String? get docId => AuthService().currentUser?.uid;
 
   // Creer docuement user
   Future creerDocUser({required UtilisateurModel utilisateur}) {
@@ -31,9 +29,9 @@ class CreationUtilisateur {
     }
   }
 
-  Future ajouterBio({required String bio}) {
+  Future ajouterBio({required String bio, required String userId}) {
     try {
-      return firestoreService.collection(userCollection).doc(docId).update({
+      return firestoreService.collection(userCollection).doc(userId).update({
         'bio': bio,
       });
     } on FirebaseException catch (e) {
@@ -42,11 +40,11 @@ class CreationUtilisateur {
   }
 
   // Lire les utilisateurs
-  Stream<List<UtilisateurModel>>? users() {
+  Stream<List<UtilisateurModel>> users(String userId) {
     try {
       return firestoreService
           .collection(userCollection)
-          .where('id', isNotEqualTo: docId)
+          .where('id', isNotEqualTo: userId)
           .snapshots()
           .map(
             (event) => event.docs.map((e) {

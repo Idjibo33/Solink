@@ -52,7 +52,7 @@ class Chats {
   }
 
   //Recevoir message
-  Stream<List<Chat>>? getChats({
+  Stream<List<Chat>> getChats({
     required String receiverId,
     required String senderId,
   }) {

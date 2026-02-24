@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:so_link/Views/Screens/Chats/chats_screen.dart';
+import 'package:so_link/Views/Screens/Chats/discussions_screen.dart';
 import 'package:so_link/Views/Screens/Feed/feed_screen.dart';
 import 'package:so_link/Views/Screens/Profil/profil_screen.dart';
 import 'package:so_link/constants.dart';
@@ -13,7 +12,7 @@ class Navigation extends StatefulWidget {
 }
 
 class _NavigationState extends State<Navigation> {
-  List<Widget> pages = [FeedScreen(), ChatsScreen(), ProfilScreen()];
+  List<Widget> pages = [FeedScreen(), DiscussionsScreen(), ProfilScreen()];
   int pageIndex = 0;
   @override
   Widget build(BuildContext context) {

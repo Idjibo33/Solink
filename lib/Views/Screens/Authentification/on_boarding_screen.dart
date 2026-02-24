@@ -15,6 +15,7 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textController = TextEditingController();
+    final user = context.watch<UtililsateurProvider>().id;
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -48,7 +49,7 @@ class OnBoardingScreen extends StatelessWidget {
                     texteBouton: "Ajouter bio",
                     action: () async {
                       await value.ajouterBio(
-                        context: context,
+                        userId: user!,
                         bio: textController.text,
                       );
                       if (context.mounted) naviguerAuthGate(context);

@@ -56,7 +56,6 @@ class ConnexionScreen extends StatelessWidget {
                 builder: (context, value, child) => BoutonPrincipale(
                   texteBouton: "Se connecter",
                   action: () => value.connecterUtilisateur(
-                    context: context,
                     email: emailController.text,
                     pw: pwController.text,
                   ),

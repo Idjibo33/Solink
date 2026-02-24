@@ -4,10 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:so_link/Models/commentaire.dart';
 import 'package:so_link/Models/post.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
+import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Widgets/commentaire_widget.dart';
 import 'package:so_link/Views/Widgets/loading_widget.dart';
-import 'package:so_link/Views/Widgets/post_widget.dart';
 import 'package:so_link/Views/Widgets/simple_text_field.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class CommentairesScreen extends StatefulWidget {
   final PostModel post;
@@ -27,29 +28,32 @@ class _CommentairesScreenState extends State<CommentairesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UtililsateurProvider>().id;
+    bool chargement = true;
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            PostWidget(post: widget.post),
             Consumer<PostsProvider>(
               builder: (context, value, child) => StreamBuilder(
-                stream: value.readcomments(
-                  context: context,
-                  docId: widget.post.id,
-                ),
+                stream: value.readcomments(docId: widget.post.id),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
+                    chargement = true;
                     return LoadingWidget();
                   }
                   if (snapshot.hasData && snapshot.data != null) {
+                    chargement = false;
                     return Expanded(
-                      child: ListView.builder(
-                        itemCount: snapshot.data?.length,
-                        itemBuilder: (context, index) => CommentaireWidget(
-                          commentaire: snapshot.data![index],
+                      child: Skeletonizer(
+                        enabled: chargement,
+                        child: ListView.builder(
+                          itemCount: snapshot.data?.length,
+                          itemBuilder: (context, index) => CommentaireWidget(
+                            commentaire: snapshot.data![index],
+                          ),
                         ),
                       ),
                     );
@@ -76,17 +80,19 @@ class _CommentairesScreenState extends State<CommentairesScreen> {
                         await value.addComment(
                           context: context,
                           commentaire: Commentaire(
+                            userName: '',
                             id: "",
                             content: textController.text,
                             userId: '',
                             creeLe: Timestamp.now(),
                           ),
                           docId: widget.post.id,
+                          userId: user!,
                         );
                         textController.clear();
                       },
                       icon: value.chargement
-                          ? CircularProgressIndicator.adaptive()
+                          ? LoadingWidget()
                           : Icon(Icons.send),
                     ),
                   ),

@@ -46,7 +46,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                 icon: Icon(cacherPw ? Icons.visibility : Icons.visibility_off),
               ),
               hintText: widget.hintTexte,
-              hintStyle: hintText,
+              hintStyle: hintTextStyle,
               filled: true,
               fillColor: couleureSecondaire,
               border: OutlineInputBorder(

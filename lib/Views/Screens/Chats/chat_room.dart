@@ -27,7 +27,7 @@ class _ChatRoomState extends State<ChatRoom> {
 
   @override
   Widget build(BuildContext context) {
-    final currentUser = context.watch<UtililsateurProvider>().docId;
+    final currentUser = context.watch<UtililsateurProvider>().id;
 
     return Scaffold(
       appBar: AppBar(
@@ -64,8 +64,8 @@ class _ChatRoomState extends State<ChatRoom> {
                         child: CircularProgressIndicator.adaptive(),
                       );
                     }
-                    if (snapshot.hasData && snapshot.data == null) {
-                      return Center(child: Text("Aucun message trouvé"));
+                    if (snapshot.data == null) {
+                      return Center(child: Text("Aucun utilisateur"));
                     }
                     return ListView.builder(
                       reverse: true,

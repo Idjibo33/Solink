@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Providers/Auth/connexion_provider.dart';
 import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
 import 'package:so_link/Providers/Auth/inscription_provider.dart';
@@ -37,6 +38,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: Snackbarservices.snackbarKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: couleurePrincipale),

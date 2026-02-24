@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:so_link/Models/SnackBars/error_snackbar.dart';
-import 'package:so_link/Models/SnackBars/succes_snackbar.dart';
-import 'package:so_link/Models/naviguer_on_boarding_screen.dart';
+import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Models/utilisateur.dart';
 import 'package:so_link/Services/Firebase/Auth/auth.dart';
 import 'package:so_link/Services/Firebase/Auth/inscription.dart';
@@ -14,9 +12,9 @@ class InscriptionProvider extends ChangeNotifier {
   bool _chargement = false;
   String _messsage = "";
   bool get chargement => _chargement;
+  final Snackbarservices _snackbarservices = Snackbarservices();
   // Connecter l'utilisateur
   Future inscrireUtilisateur({
-    required BuildContext context,
     required String nom,
     required String prenom,
     required String email,
@@ -25,9 +23,7 @@ class InscriptionProvider extends ChangeNotifier {
     if (email.isEmpty || pw.isEmpty || nom.isEmpty || prenom.isEmpty) {
       _messsage = "Toutes les cases sont obligatoires";
       notifyListeners();
-      if (context.mounted) {
-        showError(context: context, message: _messsage);
-      }
+      _snackbarservices.showError(_messsage);
       return;
     }
     _chargement = true;
@@ -51,17 +47,12 @@ class InscriptionProvider extends ChangeNotifier {
       _chargement = false;
       _messsage = "Compte crée avec succès";
       notifyListeners();
-      if (context.mounted) {
-        showSucces(context: context, message: _messsage);
-        naviguerOnboardingScreen(context);
-      }
+      _snackbarservices.showSuccess(_messsage);
     } catch (e) {
       _chargement = false;
       _messsage = e.toString();
       notifyListeners();
-      if (context.mounted) {
-        showError(context: context, message: _messsage);
-      }
+      _snackbarservices.showError(_messsage);
     }
   }
 }

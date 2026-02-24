@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so_link/Services/Firebase/Auth/auth.dart';
 import 'package:so_link/Views/Screens/Authentification/connexion_screen.dart';
-import 'package:so_link/Views/Screens/Feed/feed_screen.dart';
 import 'package:so_link/Views/Widgets/navigation.dart';
 
 class AuthGate extends StatelessWidget {

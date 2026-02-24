@@ -4,10 +4,12 @@ class Commentaire {
   String id;
   String content;
   String userId;
+  String userName;
   Timestamp creeLe;
   Commentaire({
     required this.id,
     required this.content,
+    required this.userName,
     required this.userId,
     required this.creeLe,
   });
@@ -17,6 +19,7 @@ class Commentaire {
       content: map['content'],
       userId: map['userId'],
       creeLe: map['creeLe'],
+      userName: map['userName'],
     );
   }
 }

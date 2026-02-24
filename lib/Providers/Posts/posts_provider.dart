@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:so_link/Models/SnackBars/error_snackbar.dart';
-import 'package:so_link/Models/SnackBars/succes_snackbar.dart';
 import 'package:so_link/Models/commentaire.dart';
+import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Models/post.dart';
 import 'package:so_link/Services/Firebase/Firestore/post.dart';
 
@@ -10,15 +9,14 @@ class PostsProvider extends ChangeNotifier {
   bool _chargement = false;
   String _messsage = "";
   bool get chargement => _chargement;
+  final Snackbarservices _snackbarservices = Snackbarservices();
   //Tous les posts
   Stream<List<PostModel>>? get posts => _postsServices.readPosts();
 
-  // Les postes de l'utilisateurs
-  Stream<List<PostModel>>? get userPosts => _postsServices.lirePostUser();
   //Ajouter le poste
   Future ajouterPost({
-    required BuildContext context,
     required PostModel newpost,
+    required String userId,
   }) async {
     if (newpost.content.isEmpty) {
       return;
@@ -26,17 +24,17 @@ class PostsProvider extends ChangeNotifier {
     _chargement = true;
     notifyListeners();
     try {
-      await _postsServices.creerPost(post: newpost);
+      await _postsServices.creerPost(post: newpost, userId: userId);
 
       _chargement = false;
       _messsage = "Poste ajoutée avec succès";
       notifyListeners();
-      if (context.mounted) showSucces(context: context, message: _messsage);
+      _snackbarservices.showSuccess(_messsage);
     } catch (e) {
       _chargement = false;
       _messsage = e.toString();
       notifyListeners();
-      if (context.mounted) showError(context: context, message: _messsage);
+      _snackbarservices.showError(_messsage);
     }
   }
 
@@ -45,6 +43,7 @@ class PostsProvider extends ChangeNotifier {
     required BuildContext context,
     required Commentaire commentaire,
     required String docId,
+    required String userId,
   }) async {
     if (commentaire.content.isEmpty) {
       return;
@@ -52,29 +51,43 @@ class PostsProvider extends ChangeNotifier {
     _chargement = true;
     notifyListeners();
     try {
-      await _postsServices.addComment(commentaire, docId);
+      await _postsServices.addComment(
+        commentaire: commentaire,
+        postId: docId,
+        userId: userId,
+      );
       _chargement = false;
-      _messsage = "Commentaire ajouté avec succès";
       notifyListeners();
-      if (context.mounted) showSucces(context: context, message: _messsage);
     } catch (e) {
       _messsage = e.toString();
       notifyListeners();
-      if (context.mounted) showError(context: context, message: _messsage);
+      _snackbarservices.showError(_messsage);
     }
   }
 
   // lire les commentaire du post
-  Stream<List<Commentaire>>? readcomments({
-    required BuildContext context,
-    required docId,
-  }) {
+  Stream<List<Commentaire>>? readcomments({required String docId}) {
     try {
       return _postsServices.readPostComments(docId);
     } catch (e) {
       _messsage = e.toString();
       notifyListeners();
-      if (context.mounted) showError(context: context, message: _messsage);
+      _snackbarservices.showError(_messsage);
+      return null;
+    }
+  }
+
+  // Lires les postes de l'utilisateur
+  Stream<List<PostModel>>? getUserPosts({
+    required String userId,
+    required BuildContext context,
+  }) {
+    try {
+      return _postsServices.lirePostUser(userId: userId);
+    } catch (e) {
+      _messsage = e.toString();
+      notifyListeners();
+      _snackbarservices.showError(_messsage);
       return null;
     }
   }

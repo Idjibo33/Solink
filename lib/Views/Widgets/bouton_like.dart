@@ -29,9 +29,9 @@ class _BoutonLikeState extends State<BoutonLike> {
   Widget build(BuildContext context) {
     void changerReaction() {
       if (isLiked) {
-        Post().removeLike(widget.docId);
+        Post().removeLike(docId: widget.docId, userId: widget.userId);
       } else {
-        Post().addLike(widget.docId);
+        Post().addLike(docId: widget.docId, userId: widget.userId);
       }
     }
 

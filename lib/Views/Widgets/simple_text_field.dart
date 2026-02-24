@@ -19,7 +19,7 @@ class SimpleTextField extends StatelessWidget {
       maxLines: 3,
       decoration: InputDecoration(
         hintText: _hint,
-        hintStyle: hintText,
+        hintStyle: hintTextStyle,
         filled: true,
         fillColor: couleureSecondaire,
         border: OutlineInputBorder(
