@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:so_link/Models/naviguer_on_boarding_screen.dart';
 import 'package:so_link/Models/textfield.dart';
 import 'package:so_link/Providers/Auth/inscription_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
@@ -78,12 +79,17 @@ class InscriptionScreen extends StatelessWidget {
                 Consumer<InscriptionProvider>(
                   builder: (context, value, child) => BoutonPrincipale(
                     texteBouton: "S'inscrire",
-                    action: () => value.inscrireUtilisateur(
-                      nom: nomController.text,
-                      prenom: prenomController.text,
-                      email: emailController.text,
-                      pw: pwController.text,
-                    ),
+                    action: () async {
+                      await value.inscrireUtilisateur(
+                        nom: nomController.text,
+                        prenom: prenomController.text,
+                        email: emailController.text,
+                        pw: pwController.text,
+                      );
+                      if (context.mounted) {
+                        naviguerOnboardingScreen(context);
+                      }
+                    },
                     chargement: value.chargement,
                   ),
                 ),
