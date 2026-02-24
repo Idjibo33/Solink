@@ -62,6 +62,7 @@ class Chats {
           .collection(chatRoomCollection)
           .doc(chatRoomId)
           .collection(messageCollection)
+          .orderBy('envoyeLe', descending: true)
           .snapshots()
           .map(
             (event) => event.docs.map((e) {
