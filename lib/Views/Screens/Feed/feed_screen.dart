@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-import 'package:so_link/Models/naviguer_profil_screen.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
+import 'package:so_link/Views/Widgets/loading_widget.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
 import 'package:so_link/Views/Widgets/new_post_1.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
@@ -71,9 +70,7 @@ class FeedScreen extends StatelessWidget {
                   );
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return SliverToBoxAdapter(
-                    child: Center(child: CircularProgressIndicator.adaptive()),
-                  );
+                  return SliverToBoxAdapter(child: LoadingWidget());
                 }
                 if (snapshot.hasData && snapshot.data == null) {
                   return SliverToBoxAdapter(

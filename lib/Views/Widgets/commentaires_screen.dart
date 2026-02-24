@@ -5,9 +5,9 @@ import 'package:so_link/Models/commentaire.dart';
 import 'package:so_link/Models/post.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Views/Widgets/commentaire_widget.dart';
+import 'package:so_link/Views/Widgets/loading_widget.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
 import 'package:so_link/Views/Widgets/simple_text_field.dart';
-import 'package:so_link/constants.dart';
 
 class CommentairesScreen extends StatefulWidget {
   final PostModel post;
@@ -42,7 +42,7 @@ class _CommentairesScreenState extends State<CommentairesScreen> {
                 ),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    Center(child: CircularProgressIndicator.adaptive());
+                    return LoadingWidget();
                   }
                   if (snapshot.hasData && snapshot.data != null) {
                     return Expanded(

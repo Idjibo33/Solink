@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_secondaire.dart';
+import 'package:so_link/Views/Widgets/loading_widget.dart';
 import 'package:so_link/Views/Widgets/user_avatar.dart';
 import 'package:so_link/constants.dart';
 
@@ -93,7 +94,7 @@ class ProfilStatistique extends StatelessWidget {
           if (snapshot.hasError) {
             return Center(child: Text(snapshot.error.toString()));
           }
-          return Center(child: CircularProgressIndicator.adaptive());
+          return LoadingWidget();
         },
       ),
     );

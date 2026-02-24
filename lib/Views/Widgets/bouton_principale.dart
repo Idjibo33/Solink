@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:so_link/Views/Widgets/loading_widget.dart';
 
 class BoutonPrincipale extends StatelessWidget {
   final String texteBouton;
@@ -17,9 +18,7 @@ class BoutonPrincipale extends StatelessWidget {
       width: double.infinity,
       child: FilledButton(
         onPressed: chargement ? null : action,
-        child: chargement
-            ? CircularProgressIndicator.adaptive()
-            : Text(texteBouton),
+        child: chargement ? LoadingWidget() : Text(texteBouton),
       ),
     );
   }

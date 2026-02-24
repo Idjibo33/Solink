@@ -5,6 +5,7 @@ import 'package:so_link/Models/post.dart';
 import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Views/Screens/Profil/profil_statistique.dart';
+import 'package:so_link/Views/Widgets/loading_widget.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
 
 class ProfilScreen extends StatelessWidget {
@@ -44,9 +45,7 @@ class ProfilScreen extends StatelessWidget {
                   );
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return SliverToBoxAdapter(
-                    child: Center(child: CircularProgressIndicator.adaptive()),
-                  );
+                  return SliverToBoxAdapter(child: LoadingWidget());
                 }
                 if (snapshot.hasData && snapshot.data!.isEmpty) {
                   return SliverToBoxAdapter(

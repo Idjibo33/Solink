@@ -5,6 +5,7 @@ import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_like.dart';
 import 'package:so_link/Views/Widgets/commentaires_screen.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
+import 'package:so_link/Views/Widgets/loading_widget.dart';
 import 'package:so_link/Views/Widgets/user_avatar.dart';
 import 'package:so_link/constants.dart';
 
@@ -42,9 +43,7 @@ class PostWidget extends StatelessWidget {
                           }
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return Center(
-                              child: CircularProgressIndicator.adaptive(),
-                            );
+                            return LoadingWidget();
                           }
                           return Text(
                             snapshot.data!.nom,
