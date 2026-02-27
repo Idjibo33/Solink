@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:so_link/Views/Screens/Chats/discussions_screen.dart';
 import 'package:so_link/Views/Screens/Feed/feed_screen.dart';
 import 'package:so_link/Views/Screens/Profil/profil_screen.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Models/constants.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});

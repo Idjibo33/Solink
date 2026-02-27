@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so_link/Services/Firebase/Firestore/post.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Models/constants.dart';
 
 class BoutonLike extends StatefulWidget {
   final List likes;

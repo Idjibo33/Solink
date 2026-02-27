@@ -8,7 +8,7 @@ import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
 import 'package:so_link/Views/Widgets/password_text_field.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Models/constants.dart';
 
 class ConnexionScreen extends StatelessWidget {
   const ConnexionScreen({super.key});

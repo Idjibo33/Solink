@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:so_link/Models/chat.dart';
 import 'package:so_link/Models/gerer_timestamp.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Models/constants.dart';
 
 class ChatBubble extends StatelessWidget {
   final Chat chat;

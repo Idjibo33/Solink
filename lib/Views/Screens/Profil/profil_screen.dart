@@ -8,7 +8,7 @@ import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Screens/Profil/profil_statistique.dart';
 import 'package:so_link/Views/Widgets/loading_widget.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Models/constants.dart';
 
 class ProfilScreen extends StatelessWidget {
   const ProfilScreen({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Models/constants.dart';
 
 class LogoWidget extends StatelessWidget {
   final double padding;

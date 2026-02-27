@@ -7,7 +7,7 @@ import 'package:so_link/Views/Widgets/chat_bubble.dart';
 import 'package:so_link/Views/Widgets/custom_icon_button.dart';
 import 'package:so_link/Views/Widgets/simple_text_field.dart';
 import 'package:so_link/Views/Widgets/user_avatar.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Models/constants.dart';
 
 class ChatRoom extends StatefulWidget {
   final UtilisateurModel user;

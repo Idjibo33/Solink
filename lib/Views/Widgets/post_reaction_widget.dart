@@ -4,7 +4,7 @@ import 'package:so_link/Models/post.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_like.dart';
 import 'package:so_link/Views/Screens/Commentaires/commentaires_screen.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Models/constants.dart';
 
 class PostReactionWidget extends StatelessWidget {
   final PostModel post;

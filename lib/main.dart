@@ -8,15 +8,17 @@ import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
 import 'package:so_link/Providers/Auth/inscription_provider.dart';
 import 'package:so_link/Providers/Chats/chat_provider.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
+import 'package:so_link/Providers/Remote%20config/remote_config_provider.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/auth_gate.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Models/constants.dart';
 import 'package:so_link/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(
     MultiProvider(
       providers: [
@@ -26,6 +28,9 @@ void main() async {
         ChangeNotifierProvider(create: (context) => UtililsateurProvider()),
         ChangeNotifierProvider(create: (context) => PostsProvider()),
         ChangeNotifierProvider(create: (context) => ChatProvider()),
+        ChangeNotifierProvider(
+          create: (context) => RemoteConfigProvider()..init(),
+        ),
       ],
       child: MainApp(),
     ),

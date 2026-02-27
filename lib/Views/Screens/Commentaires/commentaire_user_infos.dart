@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:so_link/Models/commentaire.dart';
 import 'package:so_link/Models/gerer_timestamp.dart';
 import 'package:so_link/Views/Widgets/user_avatar.dart';
-import 'package:so_link/constants.dart';
+import 'package:so_link/Models/constants.dart';
 
 class CommentaireUserInfos extends StatelessWidget {
   final Commentaire commentaire;
