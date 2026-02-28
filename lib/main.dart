@@ -7,6 +7,7 @@ import 'package:so_link/Providers/Auth/connexion_provider.dart';
 import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
 import 'package:so_link/Providers/Auth/inscription_provider.dart';
 import 'package:so_link/Providers/Chats/chat_provider.dart';
+import 'package:so_link/Providers/Machine%20learning/language.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Providers/Remote%20config/remote_config_provider.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
@@ -38,6 +39,7 @@ void main() async {
             ..requireUpdate(),
         ),
         ChangeNotifierProvider(create: (context) => VersionProvider()),
+        ChangeNotifierProvider(create: (context) => LanguageProvider()),
       ],
       child: MainApp(),
     ),
