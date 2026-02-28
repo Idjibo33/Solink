@@ -17,7 +17,7 @@ class LogoWidget extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.all(padding),
-        child: Icon(Icons.link_rounded, size: size, color: couleureBlancheDark),
+        child: Icon(Icons.link_rounded, size: size, color: Colors.white),
       ),
     );
   }

@@ -22,12 +22,12 @@ class RequiredUpdateScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              LogoWidget(padding: 12, size: 50),
+              LogoWidget(padding: 12, size: 40),
               Gap(20),
               Icon(Icons.update, size: 80, color: Colors.orange),
               Gap(12),
               Text(
-                "Télécharger la version $minVersion de votre application pour continuer à l'utiliser",
+                "Télécharger la version $minVersion de l'application pour continuer à l'utiliser",
                 style: enteteTexte,
                 textAlign: TextAlign.center,
               ),

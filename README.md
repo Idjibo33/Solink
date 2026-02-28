@@ -3,13 +3,12 @@
 Une application de réseau social minimaliste pour explorer les interactions en temps réel avec Flutter et Firebase.
 Elle permet aux utilisateurs de partager des postes et d'intéragir à travers des likes et des commentaire
 
-L'objectif est l'apprentissage des opérations CRUD avec firebase en utilisant flutter, la gestion des flux de données et UI moderne.
-
 ## Fonctionnalités
 - **Authentification :** Inscription et connexion avec Email/Mot de passe et on boarding.
 - **Feed :** Affichage des publications en temps réel.
 - **Interactions :** Système de likes et commentaires.
 - **Profil :** Affichage des informations utilisateur.
+- **Déploiement de fonctionnalité :** affichage d'ecran de maintenance et de mise à forcée grâce à Firebase remote config.
 ## Quick overview
 
 ## Structure du Projet
@@ -33,4 +32,4 @@ L'objectif est l'apprentissage des opérations CRUD avec firebase en utilisant f
 ....
 
 ## Aperću 
-<img src="assets/screenshots/connexion.png" width="250"> | <img src="assets/screenshots/inscription.png" width="250"> | <img src="assets/screenshots/on boarding.png" width="250"> | <img src="assets/screenshots/feed.png" width="250"> | <img src="assets/screenshots/discussions.png" width="250"> | <img src="assets/screenshots/chat.png" width="250"> | <img src="assets/screenshots/chat1.png" width="250"> | <img src="assets/screenshots/chat2.png" width="250"> | <img src="assets/screenshots/profil.png" width="250"> | <img src="assets/screenshots/profil1.png" width="250">
+<img src="assets/screenshots/connexion.png" width="250"> | <img src="assets/screenshots/inscription.png" width="250"> | <img src="assets/screenshots/on boarding.png" width="250"> | <img src="assets/screenshots/feed.png" width="250"> | <img src="assets/screenshots/discussions.png" width="250"> | <img src="assets/screenshots/chat.png" width="250"> | <img src="assets/screenshots/chat1.png" width="250"> | <img src="assets/screenshots/chat2.png" width="250"> | <img src="assets/screenshots/profil.png" width="250"> | <img src="assets/screenshots/profil1.png" width="250"> | <img src="assets/screenshots/maintenance.png" width="250"> | <img src="assets/screenshots/maj.png" width="250">

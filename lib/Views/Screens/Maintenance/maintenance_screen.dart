@@ -20,13 +20,14 @@ class MaintenanceScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            LogoWidget(padding: 12, size: 50),
+            LogoWidget(padding: 12, size: 40),
             Gap(20),
             IconViewer(controller: controller, height: 150, width: 150),
-            Gap(12),
-            Text("On revient vite !", style: enteteTexte),
             Gap(8),
-            Text("Environ 1 h", style: corpsTexte),
+            Text("Maintenance", style: enteteTexte),
+            Gap(12),
+            Text("On revient vite !", style: corpsTexte),
+            Text("Environ 1 h de temps...", style: corpsTexte),
           ],
         ),
       ),
