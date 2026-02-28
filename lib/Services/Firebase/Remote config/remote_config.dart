@@ -18,7 +18,10 @@ class RemoteConfigServices {
 
   Future<void> setDefaultValues() async {
     try {
-      await remoteConfig.setDefaults({"test": false});
+      await remoteConfig.setDefaults({
+        "enMaintenance": false,
+        "min_version": 2,
+      });
     } on FirebaseException catch (e) {
       throw Exception(e);
     }

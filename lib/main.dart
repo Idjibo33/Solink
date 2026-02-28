@@ -10,6 +10,9 @@ import 'package:so_link/Providers/Chats/chat_provider.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Providers/Remote%20config/remote_config_provider.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
+import 'package:so_link/Providers/Version/version_provider.dart';
+import 'package:so_link/Views/Screens/Maintenance/maintenance_screen.dart';
+import 'package:so_link/Views/Screens/Update/required_update_screen.dart';
 import 'package:so_link/auth_gate.dart';
 import 'package:so_link/Models/constants.dart';
 import 'package:so_link/firebase_options.dart';
@@ -29,8 +32,12 @@ void main() async {
         ChangeNotifierProvider(create: (context) => PostsProvider()),
         ChangeNotifierProvider(create: (context) => ChatProvider()),
         ChangeNotifierProvider(
-          create: (context) => RemoteConfigProvider()..init(),
+          create: (context) => RemoteConfigProvider()
+            ..init()
+            ..getMaintenanceConfig()
+            ..requireUpdate(),
         ),
+        ChangeNotifierProvider(create: (context) => VersionProvider()),
       ],
       child: MainApp(),
     ),
@@ -48,7 +55,17 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: couleurePrincipale),
       ),
-      home: AuthGate(),
+      home: Consumer<RemoteConfigProvider>(
+        builder: (context, value, child) {
+          if (value.getMaintenanceConfig()) {
+            return MaintenanceScreen();
+          }
+          if (value.requireUpdate()) {
+            return RequiredUpdateScreen();
+          }
+          return AuthGate();
+        },
+      ),
     );
   }
 }

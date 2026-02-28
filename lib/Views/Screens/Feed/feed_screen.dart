@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
-import 'package:so_link/Providers/Remote%20config/remote_config_provider.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/loading_widget.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
@@ -51,27 +50,6 @@ class FeedScreen extends StatelessWidget {
               ),
               floating: true,
               snap: true,
-              actions: [
-                Consumer<RemoteConfigProvider>(
-                  builder: (context, value, child) => FutureBuilder(
-                    future: value.getConfigBool(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData && snapshot.data!) {
-                        return Icon(Icons.sunny);
-                      }
-                      if (snapshot.hasError) {
-                        return Text(snapshot.error.toString());
-                      }
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator.adaptive(),
-                        );
-                      }
-                      return SizedBox();
-                    },
-                  ),
-                ),
-              ],
             ),
             SliverToBoxAdapter(
               key: newPostWidget,
