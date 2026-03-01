@@ -37,21 +37,20 @@ class _PostWidgetState extends State<PostWidget> {
               PostUserInfos(post: widget.post),
               Text(widget.post.content),
 
-              Consumer<LanguageProvider>(
-                builder: (context, value, child) => TextButton(
-                  onPressed: () => value
-                      .translateLanguage(texte: widget.post.content)
-                      .then(
-                        (texte) => setState(() {
-                          translation = texte;
-                        }),
+              translation == null
+                  ? Consumer<LanguageProvider>(
+                      builder: (context, value, child) => TextButton(
+                        onPressed: () => value
+                            .translateLanguage(texte: widget.post.content)
+                            .then(
+                              (texte) => setState(() {
+                                translation = texte;
+                              }),
+                            ),
+                        child: Text("Traduire"),
                       ),
-                  child: Text("Traduire"),
-                ),
-              ),
-              translation != null
-                  ? Text(translation!, style: corpsTexte)
-                  : SizedBox(),
+                    )
+                  : Text(translation!, style: corpsTexte),
 
               PostReactionWidget(post: widget.post),
             ],

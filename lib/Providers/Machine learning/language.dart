@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_mlkit_translation/google_mlkit_translation.dart';
 import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Services/Firebase/Machine%20Learning/language_id.dart';
 import 'package:so_link/Services/Firebase/Machine%20Learning/language_translation.dart';
