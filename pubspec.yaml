@@ -18,6 +18,7 @@ dependencies:
   gap: ^3.0.1
   google_fonts: ^8.0.2
   google_mlkit_language_id: ^0.13.1
+  google_mlkit_translation: ^0.13.1
   lordicon: ^1.0.3
   provider: ^6.1.5+1
   skeletonizer: ^2.1.3
