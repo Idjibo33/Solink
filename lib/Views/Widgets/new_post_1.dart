@@ -6,7 +6,7 @@ import 'package:so_link/Models/constants.dart';
 import 'package:so_link/Models/post.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
-import 'package:so_link/Services/Firebase/Ai/ai_services.dart';
+import 'package:so_link/Services/Firebase/Ai%20Logic/ai_services.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/post_generation_bottom_sheet.dart';

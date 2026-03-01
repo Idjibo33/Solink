@@ -1,9 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
 import 'package:so_link/Models/constants.dart';
+import 'package:so_link/Models/post.dart';
 import 'package:so_link/Models/textfield.dart';
+import 'package:so_link/Providers/Ai%20logic/ai_logic_provider.dart';
+import 'package:so_link/Providers/Posts/posts_provider.dart';
+import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Widgets/ai_generating_button.dart';
+import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
-import 'package:so_link/Views/Widgets/simple_text_field.dart';
 
 class PostGenerationBottomSheet extends StatefulWidget {
   const PostGenerationBottomSheet({super.key});
@@ -14,11 +21,13 @@ class PostGenerationBottomSheet extends StatefulWidget {
 }
 
 class _PostGenerationBottomSheetState extends State<PostGenerationBottomSheet> {
-  final texteController = TextEditingController();
+  TextEditingController texteController = TextEditingController();
+  bool? showPublishButton;
   @override
   void initState() {
     super.initState();
     texteController;
+    showPublishButton = false;
   }
 
   @override
@@ -29,6 +38,8 @@ class _PostGenerationBottomSheetState extends State<PostGenerationBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UtililsateurProvider>();
+
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -43,10 +54,9 @@ class _PostGenerationBottomSheetState extends State<PostGenerationBottomSheet> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12),
             child: SafeArea(
-              child: Column(
-                spacing: 8,
+              child: ListView(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,16 +76,52 @@ class _PostGenerationBottomSheetState extends State<PostGenerationBottomSheet> {
                       hintTexte: "De quoi le texte doit s'agir",
                       labelTexte: "Description du post",
                       texteController: texteController,
-                      lines: 4,
+                      lines: 5,
                       icone: Icons.text_fields,
                     ),
                   ),
-                  Spacer(),
-                  AiGeneratingButton(
-                    action: () {
-                      Navigator.pop(context);
+                  Gap(8),
+
+                  Consumer2<AiLogicProvider, PostsProvider>(
+                    builder: (context, aiLogic, post, child) {
+                      if (showPublishButton!) {
+                        return BoutonPrincipale(
+                          texteBouton: "Publiez",
+                          action: () async {
+                            await post.ajouterPost(
+                              newpost: PostModel(
+                                comments: 0,
+                                userName: "",
+                                id: "",
+                                userId: "",
+                                content: texteController.text,
+                                creeLe: Timestamp.now(),
+                                likes: [],
+                              ),
+                              userId: user.id!,
+                            );
+
+                            texteController.clear();
+                            if (context.mounted) Navigator.pop(context);
+                          },
+                          chargement: post.chargement,
+                        );
+                      } else {
+                        return AiGeneratingButton(
+                          action: () async {
+                            final texteGeneree = await aiLogic
+                                .generatePostTexte(
+                                  prompt: texteController.text,
+                                );
+                            setState(() {
+                              texteController.text = texteGeneree!;
+                              showPublishButton = true;
+                            });
+                          },
+                          chargement: aiLogic.chargement,
+                        );
+                      }
                     },
-                    chargement: false,
                   ),
                 ],
               ),

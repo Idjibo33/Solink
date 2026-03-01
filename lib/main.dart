@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/helpers/snackbar_services.dart';
+import 'package:so_link/Providers/Ai%20logic/ai_logic_provider.dart';
 import 'package:so_link/Providers/Auth/connexion_provider.dart';
 import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
 import 'package:so_link/Providers/Auth/inscription_provider.dart';
@@ -42,6 +43,7 @@ void main() async {
         ),
         ChangeNotifierProvider(create: (context) => VersionProvider()),
         ChangeNotifierProvider(create: (context) => LanguageProvider()),
+        ChangeNotifierProvider(create: (context) => AiLogicProvider()),
       ],
       child: MainApp(),
     ),

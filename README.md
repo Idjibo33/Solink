@@ -10,6 +10,8 @@ Elle permet aux utilisateurs de partager des postes et d'intéragir à travers d
 - **Profil :** Affichage des informations utilisateur.
 - **Déploiement de fonctionnalité :** affichage d'ecran de maintenance et de mise à forcée grâce à Firebase remote config.
 - **Identification et traduction de texte :** traduction de texte des posts.
+- **Génération de texte :** Génération de texte par ia.
+
 
 ## Quick overview
 
@@ -34,4 +36,4 @@ Elle permet aux utilisateurs de partager des postes et d'intéragir à travers d
 ....
 
 ## Aperću 
-<img src="assets/screenshots/connexion.png" width="250"> | <img src="assets/screenshots/inscription.png" width="250"> | <img src="assets/screenshots/on boarding.png" width="250"> | <img src="assets/screenshots/feed.png" width="250"> | <img src="assets/screenshots/discussions.png" width="250"> | <img src="assets/screenshots/chat.png" width="250"> | <img src="assets/screenshots/chat1.png" width="250"> | <img src="assets/screenshots/chat2.png" width="250"> | <img src="assets/screenshots/profil.png" width="250"> | <img src="assets/screenshots/profil1.png" width="250"> | <img src="assets/screenshots/maintenance.png" width="250"> | <img src="assets/screenshots/maj.png" width="250">
+<img src="assets/screenshots/connexion.png" width="250"> | <img src="assets/screenshots/inscription.png" width="250"> | <img src="assets/screenshots/on boarding.png" width="250"> | <img src="assets/screenshots/feed.png" width="250"> | <img src="assets/screenshots/discussions.png" width="250"> | <img src="assets/screenshots/chat.png" width="250"> | <img src="assets/screenshots/chat1.png" width="250"> | <img src="assets/screenshots/chat2.png" width="250"> | <img src="assets/screenshots/profil.png" width="250"> | <img src="assets/screenshots/profil1.png" width="250"> | <img src="assets/screenshots/maintenance.png" width="250"> | <img src="assets/screenshots/maj.png" width="250"> | <img src="assets/screenshots/ai generation1.png" width="250"> | <img src="assets/screenshots/ai generation2.png" width="250"> | <img src="assets/screenshots/ai generation3.png" width="250"> | <img src="assets/screenshots/ai generation4.png" width="250">
