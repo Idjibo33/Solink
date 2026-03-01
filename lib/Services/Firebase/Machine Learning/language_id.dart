@@ -8,7 +8,7 @@ class LanguageId {
   Future<String> processText(String texte) async {
     try {
       final reponse = await _languageIdentifier.identifyLanguage(texte);
-
+      _languageIdentifier.close();
       return reponse;
     } on Exception catch (e) {
       return e.toString();
