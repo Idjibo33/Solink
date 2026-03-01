@@ -12,6 +12,7 @@ import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Providers/Remote%20config/remote_config_provider.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Providers/Version/version_provider.dart';
+import 'package:so_link/Services/Firebase/Messaging/messaging.dart';
 import 'package:so_link/Views/Screens/Maintenance/maintenance_screen.dart';
 import 'package:so_link/Views/Screens/Update/required_update_screen.dart';
 import 'package:so_link/auth_gate.dart';
@@ -22,6 +23,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Messaging().initMessaging();
 
   runApp(
     MultiProvider(
