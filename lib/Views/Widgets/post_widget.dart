@@ -39,15 +39,18 @@ class _PostWidgetState extends State<PostWidget> {
 
               translation == null
                   ? Consumer<LanguageProvider>(
-                      builder: (context, value, child) => TextButton(
-                        onPressed: () => value
+                      builder: (context, value, child) => GestureDetector(
+                        onTap: () => value
                             .translateLanguage(texte: widget.post.content)
                             .then(
                               (texte) => setState(() {
                                 translation = texte;
                               }),
                             ),
-                        child: Text("Traduire"),
+                        child: Text(
+                          "Traduire",
+                          style: corpsTexte.copyWith(color: couleurePrincipale),
+                        ),
                       ),
                     )
                   : Text(translation!, style: corpsTexte),
