@@ -18,16 +18,9 @@ class CustomContainer extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: 1),
+              border: Border.all(color: Colors.white, width: 2),
               borderRadius: BorderRadius.circular(24),
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.grey.withValues(alpha: 0.1),
-                  Colors.white.withValues(alpha: 0.1),
-                ],
-              ),
+              color: Colors.white.withValues(alpha: 0.8),
             ),
             child: child,
           ),
