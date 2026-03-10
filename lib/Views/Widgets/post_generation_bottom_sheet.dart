@@ -45,7 +45,7 @@ class _PostGenerationBottomSheetState extends State<PostGenerationBottomSheet> {
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: SizedBox(
-        height: 350,
+        height: 370,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -71,17 +71,17 @@ class _PostGenerationBottomSheetState extends State<PostGenerationBottomSheet> {
                       ),
                     ],
                   ),
+                  Gap(12),
                   CustomTextField(
                     values: TextfieldModel(
                       hintTexte: "De quoi le texte doit s'agir",
-                      labelTexte: "Description du post",
                       texteController: texteController,
                       lines: 5,
                       icone: Icons.text_fields,
+                      labelTexte: "",
                     ),
                   ),
-                  Gap(8),
-
+                  Gap(12),
                   Consumer2<AiLogicProvider, PostsProvider>(
                     builder: (context, aiLogic, post, child) {
                       if (showPublishButton!) {
