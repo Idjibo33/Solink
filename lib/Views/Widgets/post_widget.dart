@@ -47,11 +47,19 @@ class _PostWidgetState extends State<PostWidget> {
                                 translation = texte;
                               }),
                             ),
-                        child: Text(
-                          "Traduire",
-                          style: corpsTexte.copyWith(
-                            color: Theme.of(context).primaryColor,
-                          ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.language,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            Text(
+                              "Traduire",
+                              style: corpsTexte.copyWith(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     )
