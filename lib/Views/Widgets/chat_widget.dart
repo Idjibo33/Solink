@@ -12,7 +12,7 @@ class ChatWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
-        leading: UserAvatar(size: 24),
+        leading: UserAvatar(size: 24, username: user.nom),
         title: Text(user.nom),
         onTap: () => naviguerChatRoom(context, receiverInfos: user),
       ),

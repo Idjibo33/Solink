@@ -15,7 +15,7 @@ class PostUserInfos extends StatelessWidget {
       spacing: 8,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        UserAvatar(size: 25),
+        UserAvatar(size: 25, username: post.userName),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

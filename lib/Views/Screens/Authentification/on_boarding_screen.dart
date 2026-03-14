@@ -27,7 +27,7 @@ class OnBoardingScreen extends StatelessWidget {
               spacing: 12,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                UserAvatar(size: 50),
+                UserAvatar(size: 50, username: 'nom'),
                 Text("Parlez-nous de vous", style: enteteTexte),
                 Text(
                   "Votre bio aide les autres à vous trouver et à comprendre ce que vous faites",

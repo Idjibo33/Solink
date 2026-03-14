@@ -22,7 +22,9 @@ class ProfilStatistique extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 18.0),
                 child: Column(
                   children: [
-                    SizedBox(child: UserAvatar(size: 50)),
+                    SizedBox(
+                      child: UserAvatar(size: 50, username: snapshot.data!.nom),
+                    ),
                     Text(
                       "${snapshot.data!.nom} ${snapshot.data!.prenom}",
                       style: titreTexte,

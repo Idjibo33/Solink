@@ -18,7 +18,7 @@ class CommentaireUserInfos extends StatelessWidget {
           spacing: 8,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            UserAvatar(size: 25),
+            UserAvatar(size: 25, username: commentaire.userName),
             Text(
               commentaire.userName,
               style: titreTexte,

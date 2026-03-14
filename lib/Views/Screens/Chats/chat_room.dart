@@ -34,7 +34,7 @@ class _ChatRoomState extends State<ChatRoom> {
         title: Row(
           spacing: 8,
           children: [
-            UserAvatar(size: 24),
+            UserAvatar(size: 24, username: widget.user.nom),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
