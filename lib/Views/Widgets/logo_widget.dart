@@ -10,7 +10,7 @@ class LogoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shadowColor: Colors.tealAccent,
-      color: couleurePrincipale,
+      color: Theme.of(context).primaryColor,
       shape: RoundedRectangleBorder(
         side: BorderSide(color: couleureSecondaire),
         borderRadius: BorderRadiusGeometry.circular(50),

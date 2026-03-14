@@ -68,17 +68,21 @@ class NewPost1 extends StatelessWidget {
                           shape: BoxShape.circle,
                           border: Border.all(
                             width: 2,
-                            color: couleurePrincipale,
+                            color: Theme.of(context).primaryColor,
                           ),
                           gradient: LinearGradient(
                             begin: AlignmentGeometry.topLeft,
                             end: AlignmentGeometry.bottomRight,
 
                             colors: [
-                              couleurePrincipale.withValues(alpha: 0.5),
+                              Theme.of(
+                                context,
+                              ).primaryColor.withValues(alpha: 0.5),
                               Colors.redAccent.withValues(alpha: 0.3),
                               Colors.orangeAccent.withValues(alpha: 0.3),
-                              couleurePrincipale.withValues(alpha: 0.9),
+                              Theme.of(
+                                context,
+                              ).primaryColor.withValues(alpha: 0.9),
                             ],
                           ),
                         ),
@@ -86,7 +90,7 @@ class NewPost1 extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Icon(
                             Icons.lightbulb,
-                            color: couleurePrincipale,
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                       ),

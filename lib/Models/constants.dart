@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const Color couleurePrincipale = Colors.teal;
 final Color couleureSecondaire = Colors.white.withValues(alpha: 0.6);
 const Color couleureBlancheDark = Colors.white54;
 TextStyle hintTextStyle = GoogleFonts.inter(
@@ -25,7 +24,6 @@ TextStyle titreTexte = GoogleFonts.inter(
 TextStyle postTexte = GoogleFonts.inter();
 TextStyle boutonTexteStyle = GoogleFonts.roboto(
   fontSize: 14,
-  color: couleurePrincipale,
   fontWeight: FontWeight.bold,
 );
 TextStyle corpsTexte = GoogleFonts.inter(fontSize: 14, color: Colors.grey);

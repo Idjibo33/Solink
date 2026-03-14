@@ -21,6 +21,7 @@ class RemoteConfigServices {
       await remoteConfig.setDefaults({
         "enMaintenance": false,
         "min_version": 2,
+        "appTheme": 0,
       });
     } on FirebaseException catch (e) {
       throw Exception(e);

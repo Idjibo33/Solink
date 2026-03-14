@@ -44,7 +44,7 @@ class ProfilStatistique extends StatelessWidget {
                             Text(
                               snapshot.data!.nombrePosts.toString(),
                               style: titreTexte.copyWith(
-                                color: couleurePrincipale,
+                                color: Theme.of(context).primaryColor,
                               ),
                             ),
                             Text("Posts", style: corpsTexte),
@@ -53,14 +53,14 @@ class ProfilStatistique extends StatelessWidget {
                         Container(
                           height: 30,
                           width: 2,
-                          color: couleurePrincipale,
+                          color: Theme.of(context).primaryColor,
                         ),
                         Column(
                           children: [
                             Text(
                               snapshot.data!.followers.toString(),
                               style: titreTexte.copyWith(
-                                color: couleurePrincipale,
+                                color: Theme.of(context).primaryColor,
                               ),
                             ),
                             Text("Followers", style: corpsTexte),
@@ -69,14 +69,14 @@ class ProfilStatistique extends StatelessWidget {
                         Container(
                           height: 30,
                           width: 2,
-                          color: couleurePrincipale,
+                          color: Theme.of(context).primaryColor,
                         ),
                         Column(
                           children: [
                             Text(
                               snapshot.data!.followings.toString(),
                               style: titreTexte.copyWith(
-                                color: couleurePrincipale,
+                                color: Theme.of(context).primaryColor,
                               ),
                             ),
                             Text("Followings", style: corpsTexte),

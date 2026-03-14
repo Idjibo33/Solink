@@ -44,7 +44,7 @@ class _BoutonLikeState extends State<BoutonLike> {
       },
       icon: Icon(
         isLiked ? Icons.favorite : Icons.favorite_border,
-        color: couleurePrincipale.withValues(alpha: 0.5),
+        color: Theme.of(context).primaryColor,
       ),
     );
   }

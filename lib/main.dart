@@ -17,7 +17,6 @@ import 'package:so_link/Services/Firebase/Messaging/messaging.dart';
 import 'package:so_link/Views/Screens/Maintenance/maintenance_screen.dart';
 import 'package:so_link/Views/Screens/Update/required_update_screen.dart';
 import 'package:so_link/auth_gate.dart';
-import 'package:so_link/Models/constants.dart';
 import 'package:so_link/firebase_options.dart';
 
 void main() async {
@@ -59,7 +58,9 @@ class MainApp extends StatelessWidget {
       scaffoldMessengerKey: Snackbarservices.snackbarKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: couleurePrincipale),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: context.watch<RemoteConfigProvider>().getAppTheme(),
+        ),
       ),
       home: Consumer<RemoteConfigProvider>(
         builder: (context, value, child) {

@@ -28,4 +28,15 @@ class RemoteConfigProvider extends ChangeNotifier {
     }
     return false;
   }
+
+  Color getAppTheme() {
+    List<Color> colors = [
+      Colors.teal,
+      Colors.brown,
+      Colors.blue,
+      Colors.deepPurple,
+    ];
+    int themeNumber = _remoteConfigServices.remoteConfig.getInt("appTheme");
+    return colors.elementAt(themeNumber);
+  }
 }

@@ -36,7 +36,7 @@ class PostReactionWidget extends StatelessWidget {
               ),
               icon: Icon(
                 Icons.comment,
-                color: couleurePrincipale.withValues(alpha: 0.5),
+                color: Theme.of(context).primaryColor.withValues(alpha: 0.5),
               ),
             ),
             Text(post.comments.toString()),

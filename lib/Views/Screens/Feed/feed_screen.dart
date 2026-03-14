@@ -21,7 +21,9 @@ class FeedScreen extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadiusGeometry.circular(26),
           ),
-          backgroundColor: couleurePrincipale.withValues(alpha: 0.5),
+          backgroundColor: Theme.of(
+            context,
+          ).primaryColor.withValues(alpha: 0.5),
           onPressed: () =>
               Scrollable.ensureVisible(newPostWidget.currentContext!),
           child: Icon(Icons.create, color: Colors.white),
@@ -40,7 +42,7 @@ class FeedScreen extends StatelessWidget {
                     Text(
                       "SoLink",
                       style: enteteTexte.copyWith(
-                        color: couleurePrincipale,
+                        color: Theme.of(context).primaryColor,
                         fontSize: 25,
                         letterSpacing: 3,
                       ),

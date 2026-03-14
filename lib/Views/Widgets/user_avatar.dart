@@ -10,7 +10,7 @@ class UserAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: CircleAvatar(
-        backgroundColor: Colors.teal.withValues(alpha: 0.2),
+        backgroundColor: Theme.of(context).primaryColor.withValues(alpha: 0.2),
         radius: size,
         child: Padding(
           padding: const EdgeInsets.all(12.0),

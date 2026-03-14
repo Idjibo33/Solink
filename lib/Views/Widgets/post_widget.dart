@@ -49,7 +49,9 @@ class _PostWidgetState extends State<PostWidget> {
                             ),
                         child: Text(
                           "Traduire",
-                          style: corpsTexte.copyWith(color: couleurePrincipale),
+                          style: corpsTexte.copyWith(
+                            color: Theme.of(context).primaryColor,
+                          ),
                         ),
                       ),
                     )
