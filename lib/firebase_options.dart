@@ -47,8 +47,8 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static final FirebaseOptions web = FirebaseOptions(
-    apiKey: dotenv.env['WebApiKey']!,
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyA4B0f5PnTu13Kv2VgShj5rhVA60CGV0H0',
     appId: '1:1094348719183:web:6f9dfd1f7935e1ceca163a',
     messagingSenderId: '1094348719183',
     projectId: 'nomadvoyage-2025',
