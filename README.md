@@ -1,5 +1,7 @@
 # so_link
 
+[Live Demo](https://solink-xi.vercel.app/)
+
 Une application de réseau social minimaliste pour explorer les interactions en temps réel avec Flutter et Firebase.
 Elle permet aux utilisateurs de partager des postes et d'intéragir à travers des likes et des commentaire
 
