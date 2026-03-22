@@ -23,7 +23,7 @@ import 'package:so_link/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  if (Platform.isAndroid || Platform.isIOS) await dotenv.load(fileName: ".env");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Messaging().initMessaging();
 
