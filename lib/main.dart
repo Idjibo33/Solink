@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,14 @@ import 'package:so_link/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (Platform.isAndroid || Platform.isIOS) await dotenv.load(fileName: ".env");
+  if (kIsWeb) {
+  } else {
+    try {
+      await dotenv.load(fileName: ".env");
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Messaging().initMessaging();
 
