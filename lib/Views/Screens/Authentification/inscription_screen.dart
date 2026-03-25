@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:so_link/Models/naviguer_auth_gate.dart';
 import 'package:so_link/Models/naviguer_on_boarding_screen.dart';
 import 'package:so_link/Models/textfield.dart';
 import 'package:so_link/Providers/Auth/auth_services_provider.dart';
@@ -80,14 +81,14 @@ class InscriptionScreen extends StatelessWidget {
                   builder: (context, auth, child) => BoutonPrincipale(
                     texteBouton: "S'inscrire",
                     action: () async {
-                      await auth.inscrireUtilisateur(
+                      final inscription = await auth.inscrireUtilisateur(
                         nom: nomController.text,
                         prenom: prenomController.text,
                         email: emailController.text,
                         pw: pwController.text,
                       );
-                      if (context.mounted) {
-                        naviguerOnboardingScreen(context);
+                      if (inscription) {
+                        if (context.mounted) naviguerAuthGate(context);
                       }
                     },
                     chargement: auth.chargement,

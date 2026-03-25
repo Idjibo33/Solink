@@ -29,13 +29,7 @@ class ProfilStatistique extends StatelessWidget {
                       "${snapshot.data!.nom} ${snapshot.data!.prenom}",
                       style: titreTexte,
                     ),
-                    Text(
-                      snapshot.data!.bio,
-                      style: corpsTexte,
-                      overflow: TextOverflow.fade,
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [

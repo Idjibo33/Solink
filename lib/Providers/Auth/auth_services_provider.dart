@@ -60,7 +60,7 @@ class AuthServicesProvider extends ChangeNotifier {
   }
 
   // Connecter l'utilisateur
-  Future inscrireUtilisateur({
+  Future<bool> inscrireUtilisateur({
     required String nom,
     required String prenom,
     required String email,
@@ -70,7 +70,7 @@ class AuthServicesProvider extends ChangeNotifier {
       _messsage = "Toutes les cases sont obligatoires";
       notifyListeners();
       _snackbarServices.showError(_messsage);
-      return;
+      return false;
     }
     _chargement = true;
     notifyListeners();
@@ -79,7 +79,6 @@ class AuthServicesProvider extends ChangeNotifier {
       final userId = _auth.currentUser?.uid;
       await _utilisateur.creerDocUser(
         utilisateur: UtilisateurModel(
-          bio: "",
           followers: 0,
           followings: 0,
           nombrePosts: 0,
@@ -93,12 +92,15 @@ class AuthServicesProvider extends ChangeNotifier {
       _chargement = false;
       _messsage = "Compte crée avec succès";
       notifyListeners();
+
       _snackbarServices.showSuccess(_messsage);
+      return true;
     } catch (e) {
       _chargement = false;
       _messsage = e.toString();
       notifyListeners();
       _snackbarServices.showError(_messsage);
+      return false;
     }
   }
 }

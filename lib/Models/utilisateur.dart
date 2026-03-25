@@ -5,7 +5,6 @@ class UtilisateurModel {
   final String nom;
   final String prenom;
   final String email;
-  final String bio;
   int nombrePosts;
   int followers;
   int followings;
@@ -15,7 +14,6 @@ class UtilisateurModel {
     required this.nom,
     required this.prenom,
     required this.email,
-    required this.bio,
     required this.nombrePosts,
     required this.followers,
     required this.followings,
@@ -27,7 +25,6 @@ class UtilisateurModel {
       nom: map['nom'],
       prenom: map['prenom'],
       email: map['email'],
-      bio: map['bio'],
       followers: map['followers'],
       followings: map['followings'],
       nombrePosts: map['posts'],
