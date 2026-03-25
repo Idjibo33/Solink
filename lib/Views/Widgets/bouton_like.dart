@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:so_link/Services/Firebase/Firestore/post.dart';
-import 'package:so_link/Models/constants.dart';
+import 'package:provider/provider.dart';
+import 'package:so_link/Providers/Posts/posts_provider.dart';
 
 class BoutonLike extends StatefulWidget {
   final List likes;
@@ -28,10 +28,11 @@ class _BoutonLikeState extends State<BoutonLike> {
   @override
   Widget build(BuildContext context) {
     void changerReaction() {
+      final post = context.read<PostsProvider>();
       if (isLiked) {
-        Post().removeLike(docId: widget.docId, userId: widget.userId);
+        post.removeLike(docId: widget.docId, userId: widget.userId);
       } else {
-        Post().addLike(docId: widget.docId, userId: widget.userId);
+        post.addLike(docId: widget.docId, userId: widget.userId);
       }
     }
 

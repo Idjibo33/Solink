@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/post.dart';
-import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
+import 'package:so_link/Providers/Auth/auth_services_provider.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Screens/Profil/profil_statistique.dart';
@@ -26,9 +26,9 @@ class ProfilScreen extends StatelessWidget {
               snap: true,
               title: Text("Profile"),
               actions: [
-                Consumer<DeconnexionProvider>(
-                  builder: (context, value, child) => IconButton(
-                    onPressed: () => value.deconnecterUtilisateur(),
+                Consumer<AuthServicesProvider>(
+                  builder: (context, auth, child) => IconButton(
+                    onPressed: () => auth.deconnecterUtilisateur(),
                     icon: Icon(Icons.logout),
                   ),
                 ),

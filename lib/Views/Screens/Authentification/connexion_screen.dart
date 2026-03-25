@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/naviguer_inscription_screen.dart';
 import 'package:so_link/Models/textfield.dart';
-import 'package:so_link/Providers/Auth/connexion_provider.dart';
+import 'package:so_link/Providers/Auth/auth_services_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
@@ -22,6 +22,7 @@ class ConnexionScreen extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(left: 16.0, right: 16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             spacing: 16,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -52,14 +53,14 @@ class ConnexionScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Consumer<ConnexionProvider>(
-                builder: (context, value, child) => BoutonPrincipale(
+              Consumer<AuthServicesProvider>(
+                builder: (context, auth, child) => BoutonPrincipale(
                   texteBouton: "Se connecter",
-                  action: () => value.connecterUtilisateur(
+                  action: () => auth.connecterUtilisateur(
                     email: emailController.text,
                     pw: pwController.text,
                   ),
-                  chargement: value.chargement,
+                  chargement: auth.chargement,
                 ),
               ),
 

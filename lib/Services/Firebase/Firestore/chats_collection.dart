@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:so_link/Models/chat.dart';
-import 'package:so_link/Services/Firebase/Firestore/firestore.dart';
 
-class Chats {
-  final firestore = FirestoreService().firestoreService;
+class ChatsCollection {
+  final firestore = FirebaseFirestore.instance;
   final chatRoomCollection = "chatrooms";
   final messageCollection = "messages";
 
@@ -57,7 +56,7 @@ class Chats {
     required String senderId,
   }) {
     String chatRoomId = idChatRoom(receiverId: receiverId, senderId: senderId);
-    try {
+  
       return firestore
           .collection(chatRoomCollection)
           .doc(chatRoomId)
@@ -69,8 +68,6 @@ class Chats {
               return Chat.fromMap(e.data());
             }).toList(),
           );
-    } catch (e) {
-      throw Exception(e);
-    }
+    
   }
 }

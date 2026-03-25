@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:so_link/Models/chat.dart';
-import 'package:so_link/Services/Firebase/Firestore/chats.dart';
+import 'package:so_link/Models/helpers/get_it.dart';
+import 'package:so_link/Services/Firebase/Firestore/chats_collection.dart';
 
 class ChatProvider extends ChangeNotifier {
-  final _chatservices = Chats();
+  final _chatservices = getIt<ChatsCollection>();
   // Envoyer message
   Future? sendChat({
     required String content,

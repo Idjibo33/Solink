@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:so_link/Models/commentaire.dart';
+import 'package:so_link/Models/helpers/get_it.dart';
 import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Models/post.dart';
-import 'package:so_link/Services/Firebase/Firestore/post.dart';
+import 'package:so_link/Services/Firebase/Firestore/post_collection.dart';
 
 class PostsProvider extends ChangeNotifier {
-  final _postsServices = Post();
+  final _postsServices = getIt<PostCollection>();
   bool _chargement = false;
   String _messsage = "";
   bool get chargement => _chargement;
@@ -89,6 +90,24 @@ class PostsProvider extends ChangeNotifier {
       notifyListeners();
       _snackbarservices.showError(_messsage);
       return null;
+    }
+  }
+
+  Future addLike({required String docId, required String userId}) async {
+    try {
+      _postsServices.addLike(docId: docId, userId: userId);
+    } on Exception catch (e) {
+      _messsage = e.toString();
+      _snackbarservices.showError(_messsage);
+    }
+  }
+
+  Future removeLike({required String docId, required String userId}) async {
+    try {
+      _postsServices.removeLike(docId: docId, userId: userId);
+    } on Exception catch (e) {
+      _messsage = e.toString();
+      _snackbarservices.showError(_messsage);
     }
   }
 }

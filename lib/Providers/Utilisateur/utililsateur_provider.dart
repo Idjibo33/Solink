@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:so_link/Models/helpers/get_it.dart';
 import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Models/utilisateur.dart';
 import 'package:so_link/Services/Firebase/Auth/auth.dart';
-import 'package:so_link/Services/Firebase/Firestore/creation_utilisateur.dart';
+import 'package:so_link/Services/Firebase/Firestore/utilisateur_collection.dart';
 
 class UtililsateurProvider extends ChangeNotifier {
-  final _utilisateurServices = CreationUtilisateur();
-  CreationUtilisateur get utilisateurServices => CreationUtilisateur();
+  final _utilisateurServices = getIt<UtilisateurCollection>();
   String? get id => AuthService().currentUser?.uid;
   final Snackbarservices _snackbarservices = Snackbarservices();
 

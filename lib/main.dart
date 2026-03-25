@@ -1,15 +1,12 @@
-import 'dart:io';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:so_link/Models/helpers/get_it.dart';
 import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Providers/Ai%20logic/ai_logic_provider.dart';
-import 'package:so_link/Providers/Auth/connexion_provider.dart';
-import 'package:so_link/Providers/Auth/deconnexion_provider.dart';
-import 'package:so_link/Providers/Auth/inscription_provider.dart';
+import 'package:so_link/Providers/Auth/auth_services_provider.dart';
 import 'package:so_link/Providers/Chats/chat_provider.dart';
 import 'package:so_link/Providers/Machine%20learning/language.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
@@ -33,14 +30,14 @@ void main() async {
     }
   }
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  configureDependencies();
+
   await Messaging().initMessaging();
 
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => ConnexionProvider()),
-        ChangeNotifierProvider(create: (context) => InscriptionProvider()),
-        ChangeNotifierProvider(create: (context) => DeconnexionProvider()),
+        ChangeNotifierProvider(create: (context) => AuthServicesProvider()),
         ChangeNotifierProvider(create: (context) => UtililsateurProvider()),
         ChangeNotifierProvider(create: (context) => PostsProvider()),
         ChangeNotifierProvider(create: (context) => ChatProvider()),
