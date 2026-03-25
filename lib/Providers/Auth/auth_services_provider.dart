@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:so_link/Models/helpers/forms_validation.dart';
 import 'package:so_link/Models/helpers/get_it.dart';
 import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Models/utilisateur.dart';
@@ -10,6 +11,7 @@ class AuthServicesProvider extends ChangeNotifier {
   final _auth = getIt<AuthService>();
   final _snackbarServices = getIt<Snackbarservices>();
   final _utilisateur = getIt<UtilisateurCollection>();
+  final _form = getIt<FormsValidation>();
   bool _chargement = false;
   String _messsage = "";
   bool get chargement => _chargement;
@@ -19,10 +21,8 @@ class AuthServicesProvider extends ChangeNotifier {
     required String email,
     required String pw,
   }) async {
-    if (email.isEmpty || pw.isEmpty) {
-      _messsage = "Toutes les cases sont obligatoires";
-      _snackbarServices.showError(_messsage);
-      notifyListeners();
+    final connexion = _form.validateUserConnexionForm(email, pw);
+    if (!connexion) {
       return;
     }
     _chargement = true;
@@ -66,10 +66,13 @@ class AuthServicesProvider extends ChangeNotifier {
     required String email,
     required String pw,
   }) async {
-    if (email.isEmpty || pw.isEmpty || nom.isEmpty || prenom.isEmpty) {
-      _messsage = "Toutes les cases sont obligatoires";
-      notifyListeners();
-      _snackbarServices.showError(_messsage);
+    final validation = _form.validateUserInscriptionForm(
+      nom,
+      prenom,
+      email,
+      pw,
+    );
+    if (!validation) {
       return false;
     }
     _chargement = true;

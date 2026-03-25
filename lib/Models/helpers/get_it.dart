@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:so_link/Models/helpers/forms_validation.dart';
 import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Services/Firebase/Ai%20Logic/ai_services.dart';
 import 'package:so_link/Services/Firebase/Auth/auth.dart';
@@ -22,4 +23,5 @@ void configureDependencies() {
   getIt.registerSingleton<LanguageTranslation>(LanguageTranslation());
   getIt.registerSingleton<Messaging>(Messaging());
   getIt.registerSingleton<RemoteConfigServices>(RemoteConfigServices());
+  getIt.registerSingleton<FormsValidation>(FormsValidation());
 }

@@ -113,6 +113,7 @@ class _PostGenerationBottomSheetState extends State<PostGenerationBottomSheet> {
                                 .generatePostTexte(
                                   prompt: texteController.text,
                                 );
+
                             setState(() {
                               texteController.text = texteGeneree!;
                               showPublishButton = true;
