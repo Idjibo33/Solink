@@ -1,0 +1,31 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+final Color couleureSecondaire = Colors.white;
+const Color couleureBlancheDark = Colors.white54;
+TextStyle hintTextStyle = GoogleFonts.inter(
+  fontSize: 14,
+  color: Colors.black38,
+);
+TextStyle textfieldLabel = GoogleFonts.inter(
+  fontSize: 14,
+  color: Colors.black87,
+  fontWeight: FontWeight.w500,
+);
+TextStyle enteteTexte = GoogleFonts.roboto(
+  fontSize: 20,
+  color: Colors.black87,
+  fontWeight: FontWeight.bold,
+);
+TextStyle titreTexte = GoogleFonts.inter(
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);
+TextStyle postTexte = GoogleFonts.inter();
+TextStyle boutonTexteStyle = GoogleFonts.roboto(
+  fontSize: 14,
+  fontWeight: FontWeight.bold,
+);
+TextStyle corpsTexte = GoogleFonts.inter(fontSize: 14, color: Colors.grey);
+const double tabletPaddingHoriz = 25;
+const double desktopPaddingHoriz = 100;

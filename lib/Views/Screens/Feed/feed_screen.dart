@@ -6,7 +6,7 @@ import 'package:so_link/Views/Widgets/loading_widget.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
 import 'package:so_link/Views/Widgets/new_post_1.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
-import 'package:so_link/Models/constants.dart';
+import 'package:so_link/core/constants.dart';
 
 class FeedScreen extends StatelessWidget {
   const FeedScreen({super.key});

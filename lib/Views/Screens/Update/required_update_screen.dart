@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-import 'package:so_link/Models/constants.dart';
+import 'package:so_link/core/constants.dart';
 import 'package:so_link/Providers/Version/version_provider.dart';
 import 'package:so_link/Services/Firebase/Remote%20config/remote_config.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';

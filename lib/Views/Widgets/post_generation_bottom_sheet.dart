@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-import 'package:so_link/Models/constants.dart';
+import 'package:so_link/core/constants.dart';
 import 'package:so_link/Models/post.dart';
 import 'package:so_link/Models/textfield.dart';
 import 'package:so_link/Providers/Ai%20logic/ai_logic_provider.dart';

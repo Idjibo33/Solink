@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:so_link/Models/textfield.dart';
-import 'package:so_link/Models/constants.dart';
+import 'package:so_link/core/constants.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextfieldModel values;

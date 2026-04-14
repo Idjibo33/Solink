@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:so_link/Models/constants.dart';
+import 'package:so_link/core/constants.dart';
 import 'package:so_link/Models/post.dart';
 import 'package:so_link/Providers/Machine%20learning/language.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';

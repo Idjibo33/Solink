@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:so_link/Views/Screens/Authentification/inscription_screen.dart';
+import 'package:so_link/features/auth/presentation/inscription_screen.dart';
 
 void naviguerInscriptionScreen(BuildContext context) {
   Navigator.push(

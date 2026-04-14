@@ -6,7 +6,6 @@ class CustomIconButton extends StatelessWidget {
   const CustomIconButton({
     super.key,
     required this.action,
-    required TextEditingController controller,
     required this.icone,
   });
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lordicon/lordicon.dart';
-import 'package:so_link/Models/constants.dart';
+import 'package:so_link/core/constants.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
 
 class MaintenanceScreen extends StatelessWidget {

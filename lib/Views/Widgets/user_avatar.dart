@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:so_link/Models/constants.dart';
+import 'package:so_link/core/constants.dart';
 
 class UserAvatar extends StatelessWidget {
   final String username;

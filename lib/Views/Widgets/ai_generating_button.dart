@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:so_link/Models/constants.dart';
+import 'package:so_link/core/constants.dart';
 import 'package:so_link/Views/Widgets/loading_widget.dart';
 
 class AiGeneratingButton extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:so_link/Models/constants.dart';
+import 'package:so_link/core/constants.dart';
 
 class SimpleTextField extends StatelessWidget {
   final String _hint;
