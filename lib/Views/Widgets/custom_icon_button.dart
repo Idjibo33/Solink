@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:so_link/core/constants.dart';
 
 class CustomIconButton extends StatelessWidget {
   final VoidCallback action;
@@ -12,7 +13,13 @@ class CustomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: IconButton(onPressed: action, icon: Icon(icone)),
+      child: IconButton(
+        onPressed: action,
+        icon: Icon(icone),
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(couleureSecondaire),
+        ),
+      ),
     );
   }
 }
