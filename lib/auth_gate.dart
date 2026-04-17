@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:so_link/Services/Firebase/Auth/auth.dart';
+import 'package:so_link/features/auth/data/services/auth.dart';
 import 'package:so_link/features/auth/presentation/connexion_screen.dart';
 import 'package:so_link/Views/Widgets/navigation.dart';
 

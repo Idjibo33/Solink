@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:so_link/Models/helpers/get_it.dart';
 import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Models/utilisateur.dart';
-import 'package:so_link/Services/Firebase/Auth/auth.dart';
+import 'package:so_link/features/auth/data/services/auth.dart';
 import 'package:so_link/Services/Firebase/Firestore/utilisateur_collection.dart';
 
 class UtililsateurProvider extends ChangeNotifier {
