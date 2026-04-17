@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:provider/provider.dart';
-import 'package:so_link/Models/naviguer_auth_gate.dart';
 import 'package:so_link/Models/textfield.dart';
-import 'package:so_link/Providers/Auth/auth_services_provider.dart';
-import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
 import 'package:so_link/Views/Widgets/password_text_field.dart';
 import 'package:so_link/core/constants.dart';
+import 'package:so_link/features/auth/presentation/widgets/inscription_button.dart';
 
 class MobileInscriptionScreen extends StatelessWidget {
   const MobileInscriptionScreen({super.key});
@@ -87,22 +84,11 @@ class MobileInscriptionScreen extends StatelessWidget {
                   ),
                 ),
                 const Gap(16),
-                Consumer<AuthServicesProvider>(
-                  builder: (context, auth, child) => BoutonPrincipale(
-                    texteBouton: "S'inscrire",
-                    action: () async {
-                      final inscription = await auth.inscrireUtilisateur(
-                        nom: nomController.text,
-                        prenom: prenomController.text,
-                        email: emailController.text,
-                        pw: pwController.text,
-                      );
-                      if (inscription) {
-                        if (context.mounted) naviguerAuthGate(context);
-                      }
-                    },
-                    chargement: auth.chargement,
-                  ),
+                InscriptionButton(
+                  nom: nomController.text,
+                  prenom: prenomController.text,
+                  email: emailController.text,
+                  pw: pwController.text,
                 ),
               ],
             ),

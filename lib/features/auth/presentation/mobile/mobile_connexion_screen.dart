@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/naviguer_inscription_screen.dart';
 import 'package:so_link/Models/textfield.dart';
-import 'package:so_link/Providers/Auth/auth_services_provider.dart';
+import 'package:so_link/features/auth/logic/providers/auth_services_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
