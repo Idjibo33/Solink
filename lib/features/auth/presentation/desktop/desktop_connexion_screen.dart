@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:provider/provider.dart';
 import 'package:so_link/Models/naviguer_inscription_screen.dart';
 import 'package:so_link/Models/textfield.dart';
-import 'package:so_link/Providers/Auth/auth_services_provider.dart';
-import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
 import 'package:so_link/Views/Widgets/password_text_field.dart';
 import 'package:so_link/core/constants.dart';
+import 'package:so_link/features/auth/presentation/widgets/connexion_button.dart';
 import 'package:so_link/features/auth/presentation/widgets/large_screen_logo_presentation.dart';
 import 'package:so_link/features/auth/presentation/widgets/padding_auth_screen_column.dart';
 
@@ -60,15 +58,9 @@ class DesktopConnexionScreen extends StatelessWidget {
                       texteController: pwController,
                     ),
                     const Gap(20),
-                    Consumer<AuthServicesProvider>(
-                      builder: (context, auth, child) => BoutonPrincipale(
-                        texteBouton: "Se connecter",
-                        action: () => auth.connecterUtilisateur(
-                          email: emailController.text,
-                          pw: pwController.text,
-                        ),
-                        chargement: auth.chargement,
-                      ),
+                    ConnexionButton(
+                      email: emailController.text,
+                      pw: pwController.text,
                     ),
                     const Gap(16),
                     Row(

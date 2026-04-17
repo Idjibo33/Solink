@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:so_link/Models/helpers/get_it.dart';
 import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Providers/Ai%20logic/ai_logic_provider.dart';
-import 'package:so_link/Providers/Auth/auth_services_provider.dart';
+import 'package:so_link/features/auth/logic/providers/auth_services_provider.dart';
 import 'package:so_link/Providers/Chats/chat_provider.dart';
 import 'package:so_link/Providers/Machine%20learning/language.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';

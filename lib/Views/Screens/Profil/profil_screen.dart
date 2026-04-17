@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/post.dart';
-import 'package:so_link/Providers/Auth/auth_services_provider.dart';
+import 'package:so_link/features/auth/logic/providers/auth_services_provider.dart';
 import 'package:so_link/Providers/Posts/posts_provider.dart';
 import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Screens/Profil/profil_statistique.dart';

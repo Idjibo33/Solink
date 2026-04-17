@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:provider/provider.dart';
 import 'package:so_link/Models/naviguer_inscription_screen.dart';
 import 'package:so_link/Models/textfield.dart';
-import 'package:so_link/features/auth/logic/providers/auth_services_provider.dart';
-import 'package:so_link/Views/Widgets/bouton_principale.dart';
 import 'package:so_link/Views/Widgets/custom_container.dart';
 import 'package:so_link/Views/Widgets/custom_text_field.dart';
 import 'package:so_link/Views/Widgets/logo_widget.dart';
 import 'package:so_link/Views/Widgets/password_text_field.dart';
 import 'package:so_link/core/constants.dart';
+import 'package:so_link/features/auth/presentation/widgets/connexion_button.dart';
 
 class MobileConnexionScreen extends StatelessWidget {
   const MobileConnexionScreen({super.key});
@@ -27,7 +25,7 @@ class MobileConnexionScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Logo
-              LogoWidget(padding: 16, size: 50),
+              const LogoWidget(padding: 16, size: 50),
               const Gap(8),
               Text("soLink", style: enteteTexte, textAlign: TextAlign.center),
               const Gap(8),
@@ -62,15 +60,9 @@ class MobileConnexionScreen extends StatelessWidget {
                 ),
               ),
               const Gap(16),
-              Consumer<AuthServicesProvider>(
-                builder: (context, auth, child) => BoutonPrincipale(
-                  texteBouton: "Se connecter",
-                  action: () => auth.connecterUtilisateur(
-                    email: emailController.text,
-                    pw: pwController.text,
-                  ),
-                  chargement: auth.chargement,
-                ),
+              ConnexionButton(
+                email: emailController.text,
+                pw: pwController.text,
               ),
               const Gap(8),
               Row(

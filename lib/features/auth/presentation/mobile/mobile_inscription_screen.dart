@@ -31,7 +31,7 @@ class MobileInscriptionScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Logo
-                LogoWidget(padding: 16, size: 50),
+                const LogoWidget(padding: 16, size: 50),
                 const Gap(8),
                 Text("soLink", style: enteteTexte, textAlign: TextAlign.center),
                 const Gap(8),
