@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/naviguer_auth_gate.dart';
-import 'package:so_link/Models/naviguer_on_boarding_screen.dart';
 import 'package:so_link/Models/textfield.dart';
 import 'package:so_link/Providers/Auth/auth_services_provider.dart';
 import 'package:so_link/Views/Widgets/bouton_principale.dart';
