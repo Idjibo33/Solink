@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:so_link/Models/helpers/get_it.dart';
 import 'package:so_link/Models/helpers/snackbar_services.dart';
@@ -7,13 +9,20 @@ import 'package:so_link/Services/Firebase/Firestore/utilisateur_collection.dart'
 
 class UtililsateurProvider extends ChangeNotifier {
   final _utilisateurServices = getIt<UtilisateurCollection>();
-  String? get id => AuthService().currentUser?.uid;
+  String? get id => getIt<AuthService>().currentUser?.uid;
   final Snackbarservices _snackbarservices = Snackbarservices();
 
-  Stream<UtilisateurModel> get userData =>
-      _utilisateurServices.lireDocUser(id!);
+  Stream<UtilisateurModel> get userData {
+    final userId = id;
+    if (userId == null) {
+      return const Stream.empty();
+    }
+    return _utilisateurServices.lireDocUser(userId);
+  }
+
   bool _chargement = false;
   String _messsage = "";
+  String get message => _messsage;
   bool get chargement => _chargement;
   // ajouter/modifier la bio
   Future ajouterBio({required String bio, required String userId}) async {

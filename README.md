@@ -46,15 +46,15 @@ Solink est une application de réseau social conçue pour explorer les interacti
 | Backend | Firebase — Auth, Cloud Firestore, Storage, Messaging, Remote Config |
 | IA & ML | Firebase AI Logic (`firebase_ai`), ML Kit (language ID, traduction) |
 | Gestion d'état | Provider + get_it (injection) |
-| UI | `google_fonts`, `lordicon`, `skeletonizer`, `gap` |
-| Configuration | `flutter_dotenv` (clés hors du dépôt) |
+| UI | `google_fonts`, `lordicon`, `gap` |
+| Configuration | Clés injectées au build via `--dart-define` (jamais commitées) |
 
 ## Structure du projet
 
 ```
 lib/
-├── main.dart                 # Point d'entrée (dotenv + Firebase.initializeApp)
-├── firebase_options.dart     # Configuration Firebase (clés Android/iOS via .env)
+├── main.dart                 # Point d'entrée (Firebase.initializeApp)
+├── firebase_options.dart     # Configuration Firebase (clés Android/iOS via --dart-define)
 ├── auth_gate.dart            # Redirection selon l'état de connexion
 ├── Models/                   # Modèles (Post, Chat, Commentaire, Utilisateur…),
 │                             # constantes, navigateurs, helpers
@@ -88,15 +88,24 @@ flutter pub get
 cp .env.example .env
 #    puis renseigner AndroidApiKey et IosApiKey (Firebase > Paramètres du projet)
 
-# 2. Lancer l'application
-flutter run
+# 2. Lancer l'application en injectant les clés au build
+flutter run --dart-define-from-file=.env
 
 # (optionnel) régénérer la configuration Firebase
 dart pub global activate flutterfire_cli && flutterfire configure
 ```
 
-> - `.env` est listé dans les assets (`pubspec.yaml`) : l'application ne compile pas sans lui.
+> - Les clés Android/iOS sont lues avec `String.fromEnvironment` : aucun fichier de secrets
+>   n'est embarqué ni listé dans `pubspec.yaml`. Sans `--dart-define`, l'application compile
+>   mais Firebase ne peut pas démarrer sur Android/iOS.
 > - La clé **web** Firebase reste dans `lib/firebase_options.dart` (identifiant client public par nature) ; la sécurité des données repose sur les **règles Firestore/Storage**, à restreindre avant toute mise en production.
+
+## Tests
+
+```bash
+flutter analyze
+flutter test
+```
 
 ## Licence
 

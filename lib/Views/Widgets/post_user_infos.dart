@@ -16,13 +16,21 @@ class PostUserInfos extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         UserAvatar(size: 25, username: post.userName),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(post.userName, style: titreTexte, textAlign: TextAlign.start),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                post.userName,
+                style: titreTexte,
+                textAlign: TextAlign.start,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
 
-            Text(postDate.toString(), style: corpsTexte),
-          ],
+              Text(postDate.toString(), style: corpsTexte),
+            ],
+          ),
         ),
       ],
     );

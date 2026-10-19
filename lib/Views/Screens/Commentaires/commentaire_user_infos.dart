@@ -14,17 +14,23 @@ class CommentaireUserInfos extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          spacing: 8,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            UserAvatar(size: 25, username: commentaire.userName),
-            Text(
-              commentaire.userName,
-              style: titreTexte,
-              textAlign: TextAlign.start,
-            ),
-          ],
+        Expanded(
+          child: Row(
+            spacing: 8,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              UserAvatar(size: 25, username: commentaire.userName),
+              Expanded(
+                child: Text(
+                  commentaire.userName,
+                  style: titreTexte,
+                  textAlign: TextAlign.start,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
         ),
         Text(postDate.toString(), style: corpsTexte),
       ],

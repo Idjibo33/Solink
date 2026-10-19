@@ -47,7 +47,7 @@ class ChatsCollection {
 
     batch.set(chatRoom, chatRoomData, SetOptions(merge: true));
     batch.set(chatRef, chatData);
-    batch.commit();
+    await batch.commit();
   }
 
   //Recevoir message

@@ -18,10 +18,11 @@ class ProfilStatistique extends StatelessWidget {
           if (snapshot.hasData) {
             return SizedBox(
               height: 300,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: Column(
-                  children: [
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                  child: Column(
+                    children: [
                     SizedBox(
                       child: UserAvatar(size: 50, username: snapshot.data!.nom),
                     ),
@@ -85,6 +86,7 @@ class ProfilStatistique extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
             );
           }
           if (snapshot.hasError) {

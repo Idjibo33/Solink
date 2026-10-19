@@ -8,13 +8,20 @@ import 'package:so_link/Views/Widgets/new_post_1.dart';
 import 'package:so_link/Views/Widgets/post_widget.dart';
 import 'package:so_link/Models/constants.dart';
 
-class FeedScreen extends StatelessWidget {
+class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});
+
+  @override
+  State<FeedScreen> createState() => _FeedScreenState();
+}
+
+class _FeedScreenState extends State<FeedScreen> {
+  final GlobalKey newPostWidget = GlobalKey();
+  int tentative = 0;
 
   @override
   Widget build(BuildContext context) {
     final postProvider = context.watch<PostsProvider>();
-    final GlobalKey newPostWidget = GlobalKey();
     return Scaffold(
       floatingActionButton: CustomContainer(
         child: FloatingActionButton(
@@ -64,26 +71,48 @@ class FeedScreen extends StatelessWidget {
               ),
             ),
             StreamBuilder(
+              key: ValueKey(tentative),
               stream: postProvider.posts,
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return SliverToBoxAdapter(
-                    child: Center(child: Text(snapshot.error.toString())),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        spacing: 12,
+                        children: [
+                          Text(
+                            "Impossible de charger le feed",
+                            style: corpsTexte,
+                            textAlign: TextAlign.center,
+                          ),
+                          TextButton(
+                            onPressed: () => setState(() {
+                              tentative++;
+                            }),
+                            child: Text("Réessayer"),
+                          ),
+                        ],
+                      ),
+                    ),
                   );
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return SliverToBoxAdapter(child: LoadingWidget());
                 }
-                if (snapshot.hasData && snapshot.data == null) {
+                if (snapshot.hasData && snapshot.data!.isEmpty) {
                   return SliverToBoxAdapter(
                     child: Center(child: Text("Aucun post trouvé")),
                   );
                 }
-                return SliverList.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) =>
-                      PostWidget(post: snapshot.data![index]),
-                );
+                if (snapshot.hasData) {
+                  return SliverList.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) =>
+                        PostWidget(post: snapshot.data![index]),
+                  );
+                }
+                return SliverToBoxAdapter(child: LoadingWidget());
               },
             ),
           ],
