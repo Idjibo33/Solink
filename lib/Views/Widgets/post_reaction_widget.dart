@@ -19,7 +19,11 @@ class PostReactionWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            BoutonLike(likes: post.likes, docId: post.id, userId: user.id!),
+            BoutonLike(
+              likes: post.likes,
+              docId: post.id,
+              userId: user.id ?? '',
+            ),
             Text(post.likes.length.toString()),
           ],
         ),

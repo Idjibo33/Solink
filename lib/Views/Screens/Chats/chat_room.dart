@@ -28,6 +28,12 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     final currentUser = context.watch<UtililsateurProvider>().id;
+    if (currentUser == null) {
+      return Scaffold(
+        appBar: AppBar(title: Text(widget.user.nom, style: titreTexte)),
+        body: const Center(child: Text("Utilisateur non connecté")),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -35,12 +41,24 @@ class _ChatRoomState extends State<ChatRoom> {
           spacing: 8,
           children: [
             UserAvatar(size: 24, username: widget.user.nom),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widget.user.nom, style: titreTexte),
-                Text(widget.user.email, style: corpsTexte),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.user.nom,
+                    style: titreTexte,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    widget.user.email,
+                    style: corpsTexte,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -53,7 +71,7 @@ class _ChatRoomState extends State<ChatRoom> {
                 builder: (context, value, child) => StreamBuilder(
                   stream: value.readChats(
                     receiverId: widget.user.id,
-                    senderId: currentUser!,
+                    senderId: currentUser,
                   ),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
@@ -64,8 +82,8 @@ class _ChatRoomState extends State<ChatRoom> {
                         child: CircularProgressIndicator.adaptive(),
                       );
                     }
-                    if (snapshot.data == null) {
-                      return Center(child: Text("Aucun utilisateur"));
+                    if (snapshot.data == null || snapshot.data!.isEmpty) {
+                      return Center(child: Text("Aucun message"));
                     }
                     return ListView.builder(
                       reverse: true,
@@ -89,7 +107,7 @@ class _ChatRoomState extends State<ChatRoom> {
                   builder: (context, value, child) => CustomIconButton(
                     action: () {
                       value.sendChat(
-                        senderid: currentUser!,
+                        senderid: currentUser,
                         content: textController.text.trim(),
                         receiverId: widget.user.id,
                       );

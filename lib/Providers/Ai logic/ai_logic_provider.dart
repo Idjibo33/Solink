@@ -3,12 +3,15 @@ import 'package:so_link/Models/helpers/snackbar_services.dart';
 import 'package:so_link/Services/Firebase/Ai%20Logic/ai_services.dart';
 
 class AiLogicProvider extends ChangeNotifier {
-  final AiServices _aiServices = AiServices();
+  final AiServices _aiServices;
   final Snackbarservices _snackbarservices = Snackbarservices();
   bool _chargement = false;
   bool get chargement => _chargement;
   String _messageErreur = "";
   String get messageErreur => _messageErreur;
+
+  AiLogicProvider({AiServices? aiServices})
+      : _aiServices = aiServices ?? AiServices();
 
   Future<String?> generatePostTexte({required String prompt}) async {
     try {
@@ -18,7 +21,7 @@ class AiLogicProvider extends ChangeNotifier {
       _chargement = false;
       notifyListeners();
       return generation;
-    } on Exception catch (e) {
+    } catch (e) {
       _chargement = false;
       _messageErreur = e.toString();
       notifyListeners();

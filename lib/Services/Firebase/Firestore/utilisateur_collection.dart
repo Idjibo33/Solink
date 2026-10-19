@@ -49,7 +49,11 @@ class UtilisateurCollection {
     return firestoreService.collection(userCollection).doc(id).snapshots().map((
       snapshot,
     ) {
-      return UtilisateurModel.fromMap(snapshot.data()!);
+      final data = snapshot.data();
+      if (data == null) {
+        throw StateError("Profil utilisateur introuvable");
+      }
+      return UtilisateurModel.fromMap(data);
     });
   }
 }

@@ -1,7 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:so_link/Models/helpers/get_it.dart';
 import 'package:so_link/Models/helpers/snackbar_services.dart';
@@ -21,14 +19,8 @@ import 'package:so_link/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-  } else {
-    try {
-      await dotenv.load(fileName: ".env");
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-  }
+  // Les clés spécifiques (AndroidApiKey / IosApiKey) sont injectées au build :
+  // flutter run --dart-define-from-file=.env
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   configureDependencies();
 

@@ -37,6 +37,10 @@ class NewPost1 extends StatelessWidget {
                       child: BoutonPrincipale(
                         texteBouton: "Publiez",
                         action: () async {
+                          final userId = user.id;
+                          if (userId == null) {
+                            return;
+                          }
                           await value.ajouterPost(
                             newpost: PostModel(
                               comments: 0,
@@ -47,7 +51,7 @@ class NewPost1 extends StatelessWidget {
                               creeLe: Timestamp.now(),
                               likes: [],
                             ),
-                            userId: user.id!,
+                            userId: userId,
                           );
                           texteController.clear();
                         },

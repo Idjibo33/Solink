@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:google_mlkit_language_id/google_mlkit_language_id.dart';
 
 class LanguageId {
@@ -6,8 +7,13 @@ class LanguageId {
   );
   //Identifier un texte
   Future<String> processText(String texte) async {
-    final reponse = await _languageIdentifier.identifyLanguage(texte);
-    _languageIdentifier.close();
-    return reponse;
+    if (kIsWeb) {
+      return '';
+    }
+    try {
+      return await _languageIdentifier.identifyLanguage(texte);
+    } finally {
+      _languageIdentifier.close();
+    }
   }
 }

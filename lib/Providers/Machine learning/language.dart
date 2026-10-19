@@ -4,12 +4,19 @@ import 'package:so_link/Services/Firebase/Machine%20Learning/language_id.dart';
 import 'package:so_link/Services/Firebase/Machine%20Learning/language_translation.dart';
 
 class LanguageProvider extends ChangeNotifier {
-  final LanguageId _languageId = LanguageId();
-  final LanguageTranslation _languageTranslation = LanguageTranslation();
+  final LanguageId _languageId;
+  final LanguageTranslation _languageTranslation;
   bool _chargement = false;
   String _messsage = "";
+  String get message => _messsage;
   bool get chargement => _chargement;
   final Snackbarservices _snackbarservices = Snackbarservices();
+
+  LanguageProvider({
+    LanguageId? languageId,
+    LanguageTranslation? languageTranslation,
+  })  : _languageId = languageId ?? LanguageId(),
+        _languageTranslation = languageTranslation ?? LanguageTranslation();
 
   //Traiter un texte
   Future<String?> translateLanguage({required String texte}) async {
@@ -23,17 +30,17 @@ class LanguageProvider extends ChangeNotifier {
       if (reponse == "en") {
         return await _languageTranslation.translateEnToFr(texte);
       } else {
-        _chargement = false;
         _messsage = "Langue non-detecté";
-        notifyListeners();
         _snackbarservices.showError(_messsage);
         return null;
       }
     } catch (e) {
       _messsage = e.toString();
-      notifyListeners();
       _snackbarservices.showError(_messsage);
       return null;
+    } finally {
+      _chargement = false;
+      notifyListeners();
     }
   }
 }

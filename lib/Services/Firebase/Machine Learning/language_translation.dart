@@ -9,9 +9,11 @@ class LanguageTranslation {
       sourceLanguage: sourceLanguage,
       targetLanguage: targetLanguage,
     );
-    final String reponse = await onDeviceTranslator.translateText(texte);
-    onDeviceTranslator.close;
-    return reponse;
+    try {
+      return await onDeviceTranslator.translateText(texte);
+    } finally {
+      onDeviceTranslator.close();
+    }
   }
 
   Future<String> translateEnToFr(String texte) async {
@@ -22,8 +24,10 @@ class LanguageTranslation {
       sourceLanguage: sourceLanguage,
       targetLanguage: targetLanguage,
     );
-    final String reponse = await onDeviceTranslator.translateText(texte);
-    onDeviceTranslator.close;
-    return reponse;
+    try {
+      return await onDeviceTranslator.translateText(texte);
+    } finally {
+      onDeviceTranslator.close();
+    }
   }
 }

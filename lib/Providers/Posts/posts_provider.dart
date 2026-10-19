@@ -10,6 +10,7 @@ class PostsProvider extends ChangeNotifier {
   bool _chargement = false;
   String _messsage = "";
   bool get chargement => _chargement;
+  String get message => _messsage;
   final Snackbarservices _snackbarservices = Snackbarservices();
   //Tous les posts
   Stream<List<PostModel>>? get posts => _postsServices.readPosts();
@@ -60,6 +61,7 @@ class PostsProvider extends ChangeNotifier {
       _chargement = false;
       notifyListeners();
     } catch (e) {
+      _chargement = false;
       _messsage = e.toString();
       notifyListeners();
       _snackbarservices.showError(_messsage);
@@ -95,8 +97,8 @@ class PostsProvider extends ChangeNotifier {
 
   Future addLike({required String docId, required String userId}) async {
     try {
-      _postsServices.addLike(docId: docId, userId: userId);
-    } on Exception catch (e) {
+      await _postsServices.addLike(docId: docId, userId: userId);
+    } catch (e) {
       _messsage = e.toString();
       _snackbarservices.showError(_messsage);
     }
@@ -104,8 +106,8 @@ class PostsProvider extends ChangeNotifier {
 
   Future removeLike({required String docId, required String userId}) async {
     try {
-      _postsServices.removeLike(docId: docId, userId: userId);
-    } on Exception catch (e) {
+      await _postsServices.removeLike(docId: docId, userId: userId);
+    } catch (e) {
       _messsage = e.toString();
       _snackbarservices.showError(_messsage);
     }

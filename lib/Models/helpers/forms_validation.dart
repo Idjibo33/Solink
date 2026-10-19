@@ -9,7 +9,7 @@ class FormsValidation {
     String email,
     String pw,
   ) {
-    if (nom.isEmpty || prenom.isEmpty | email.isEmpty | pw.isEmpty) {
+    if (nom.isEmpty || prenom.isEmpty || email.isEmpty || pw.isEmpty) {
       _snackBar.showError("Toutes les cases sont obligatoires");
       return false;
     } else {
@@ -18,7 +18,7 @@ class FormsValidation {
   }
 
   bool validateUserConnexionForm(String email, String pw) {
-    if (email.isEmpty | pw.isEmpty) {
+    if (email.isEmpty || pw.isEmpty) {
       _snackBar.showError("Toutes les cases sont obligatoires");
       return false;
     }

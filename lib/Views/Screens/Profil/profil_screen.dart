@@ -40,10 +40,12 @@ class ProfilScreen extends StatelessWidget {
               ),
             ),
             StreamBuilder(
-              stream: postsProvider.getUserPosts(
-                userId: user!,
-                context: context,
-              ),
+              stream: user == null
+                  ? const Stream.empty()
+                  : postsProvider.getUserPosts(
+                      userId: user,
+                      context: context,
+                    ),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return SliverToBoxAdapter(
@@ -59,6 +61,9 @@ class ProfilScreen extends StatelessWidget {
                       child: Text("Aucun document trouvé", style: corpsTexte),
                     ),
                   );
+                }
+                if (!snapshot.hasData) {
+                  return SliverToBoxAdapter(child: LoadingWidget());
                 }
                 return SliverList.builder(
                   itemCount: snapshot.data!.length,

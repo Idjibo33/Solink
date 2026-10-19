@@ -39,13 +39,16 @@ class _PostGenerationBottomSheetState extends State<PostGenerationBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UtililsateurProvider>();
+    final hauteurDisponible = MediaQuery.sizeOf(context).height -
+        MediaQuery.viewInsetsOf(context).bottom;
+    final hauteur = hauteurDisponible < 370 ? hauteurDisponible : 370.0;
 
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: SizedBox(
-        height: 370,
+        height: hauteur < 200 ? 200 : hauteur,
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -88,6 +91,10 @@ class _PostGenerationBottomSheetState extends State<PostGenerationBottomSheet> {
                         return BoutonPrincipale(
                           texteBouton: "Publiez",
                           action: () async {
+                            final userId = user.id;
+                            if (userId == null) {
+                              return;
+                            }
                             await post.ajouterPost(
                               newpost: PostModel(
                                 comments: 0,
@@ -98,7 +105,7 @@ class _PostGenerationBottomSheetState extends State<PostGenerationBottomSheet> {
                                 creeLe: Timestamp.now(),
                                 likes: [],
                               ),
-                              userId: user.id!,
+                              userId: userId,
                             );
 
                             texteController.clear();
@@ -114,8 +121,13 @@ class _PostGenerationBottomSheetState extends State<PostGenerationBottomSheet> {
                                   prompt: texteController.text,
                                 );
 
+                            if (!mounted ||
+                                texteGeneree == null ||
+                                texteGeneree.trim().isEmpty) {
+                              return;
+                            }
                             setState(() {
-                              texteController.text = texteGeneree!;
+                              texteController.text = texteGeneree;
                               showPublishButton = true;
                             });
                           },

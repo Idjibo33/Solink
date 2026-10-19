@@ -8,7 +8,6 @@ import 'package:so_link/Providers/Utilisateur/utililsateur_provider.dart';
 import 'package:so_link/Views/Widgets/commentaire_widget.dart';
 import 'package:so_link/Views/Widgets/loading_widget.dart';
 import 'package:so_link/Views/Widgets/simple_text_field.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class CommentairesScreen extends StatefulWidget {
   final PostModel post;
@@ -29,7 +28,6 @@ class _CommentairesScreenState extends State<CommentairesScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UtililsateurProvider>().id;
-    bool chargement = true;
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -40,28 +38,26 @@ class _CommentairesScreenState extends State<CommentairesScreen> {
               builder: (context, value, child) => StreamBuilder(
                 stream: value.readcomments(docId: widget.post.id),
                 builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(child: Text(snapshot.error.toString()));
+                  }
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    chargement = true;
                     return LoadingWidget();
                   }
-                  if (snapshot.hasData && snapshot.data != null) {
-                    chargement = false;
+                  if (snapshot.hasData && snapshot.data!.isEmpty) {
+                    return Center(child: Text("Aucun commentaire trouvé"));
+                  }
+                  if (snapshot.hasData) {
                     return Expanded(
-                      child: Skeletonizer(
-                        enabled: chargement,
-                        child: ListView.builder(
-                          itemCount: snapshot.data?.length,
-                          itemBuilder: (context, index) => CommentaireWidget(
-                            commentaire: snapshot.data![index],
-                          ),
+                      child: ListView.builder(
+                        itemCount: snapshot.data?.length,
+                        itemBuilder: (context, index) => CommentaireWidget(
+                          commentaire: snapshot.data![index],
                         ),
                       ),
                     );
                   }
-                  if (snapshot.data == null) {
-                    return Center(child: Text("Aucun commentaire trouvé"));
-                  }
-                  return Center(child: Text(snapshot.error.toString()));
+                  return Center(child: Text("Aucun commentaire trouvé"));
                 },
               ),
             ),
