@@ -1,7 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:google_mlkit_translation/google_mlkit_translation.dart';
 
 class LanguageTranslation {
   Future<String> translateFrToEn(String texte) async {
+    if (kIsWeb) {
+      return texte;
+    }
     final TranslateLanguage sourceLanguage = TranslateLanguage.french;
     final TranslateLanguage targetLanguage = TranslateLanguage.english;
 
@@ -17,6 +21,9 @@ class LanguageTranslation {
   }
 
   Future<String> translateEnToFr(String texte) async {
+    if (kIsWeb) {
+      return texte;
+    }
     final TranslateLanguage sourceLanguage = TranslateLanguage.english;
     final TranslateLanguage targetLanguage = TranslateLanguage.french;
 

@@ -11,8 +11,8 @@ class RemoteConfigProvider extends ChangeNotifier {
       await _remoteConfigServices.setConfigs();
       await _remoteConfigServices.setDefaultValues();
       await _remoteConfigServices.fetchAndActivate();
-    } catch (e) {
-      throw Exception(e);
+    } catch (_) {
+      // Conserver les valeurs par défaut en cas d'échec réseau.
     }
   }
 
@@ -37,6 +37,7 @@ class RemoteConfigProvider extends ChangeNotifier {
       Colors.deepPurple,
     ];
     int themeNumber = _remoteConfigServices.remoteConfig.getInt("appTheme");
-    return colors.elementAt(themeNumber);
+    final index = themeNumber.clamp(0, colors.length - 1);
+    return colors.elementAt(index);
   }
 }

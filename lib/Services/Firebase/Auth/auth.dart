@@ -6,12 +6,12 @@ class AuthService {
   Stream<User?> get authChangesStates => auth.authStateChanges();
 
   // Connecter l'utilisateur avec email et mot de passe
-  Future connecterUtilisateur(String email, String password) {
+  Future<UserCredential> connecterUtilisateur(String email, String password) {
     return auth.signInWithEmailAndPassword(email: email, password: password);
   }
 
   // Deconnecter l'utilisateur
-  Future deconnecterUtilisateur() {
+  Future<void> deconnecterUtilisateur() {
     return auth.signOut();
   }
 

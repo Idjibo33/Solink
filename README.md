@@ -102,6 +102,10 @@ dart pub global activate flutterfire_cli && flutterfire configure
 >   mais Firebase ne peut pas démarrer sur Android/iOS.
 > - La clé **web** Firebase reste dans `lib/firebase_options.dart` (identifiant client public par nature) ; la sécurité des données repose sur les **règles Firestore/Storage**, à restreindre avant toute mise en production.
 
+## Règles Firebase
+
+Les règles Firestore et Storage sont versionnées (`firestore.rules`, `storage.rules`) et référencées dans `firebase.json`. Leur déploiement reste manuel via la console Firebase ou `firebase deploy --only firestore:rules,storage`.
+
 ## Tests
 
 ```bash
