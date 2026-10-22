@@ -1,0 +1,9 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      // Aucun usage de Storage dans l'application à ce jour.
+      allow read, write: if false;
+    }
+  }
+}
