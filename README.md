@@ -4,6 +4,8 @@
 
 [Live Demo](https://solink-xi.vercel.app/)
 
+[![Flutter CI](https://github.com/Idjibo33/Solink/actions/workflows/flutter.yml/badge.svg?branch=main)](https://github.com/Idjibo33/Solink/actions/workflows/flutter.yml)
+
 Solink est une application de réseau social conçue pour explorer les interactions en temps réel : les utilisateurs publient des posts, échangent via des likes, des commentaires et une messagerie instantanée. Le projet intègre aussi des fonctionnalités avancées de Firebase : Remote Config, ML Kit (identification et traduction de langue) et génération de texte par IA.
 
 ## Fonctionnalités
