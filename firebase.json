@@ -4,7 +4,7 @@
       "android": {
         "default": {
           "projectId": "nomadvoyage-2025",
-          "appId": "1:1094348719183:android:5ed4aa46f34ed76fca163a",
+          "appId": "1:1094348719183:android:9f441be02ea340cdca163a",
           "fileOutput": "android/app/google-services.json"
         }
       },
@@ -12,16 +12,24 @@
         "lib/firebase_options.dart": {
           "projectId": "nomadvoyage-2025",
           "configurations": {
-            "android": "1:1094348719183:android:5ed4aa46f34ed76fca163a",
-            "ios": "1:1094348719183:ios:65e2972eb92cba27ca163a",
+            "android": "1:1094348719183:android:9f441be02ea340cdca163a",
+            "ios": "1:1094348719183:ios:c7072efc2063b51eca163a",
             "web": "1:1094348719183:web:6f9dfd1f7935e1ceca163a"
           }
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "nomadvoyage-2025",
+          "appId": "1:1094348719183:ios:c7072efc2063b51eca163a",
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
         }
       }
     }
   },
   "firestore": {
-    "rules": "firestore.rules"
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   },
   "storage": {
     "rules": "storage.rules"

@@ -2,21 +2,19 @@
 
 **Réseau social minimaliste en temps réel — Flutter + Firebase**
 
-[Live Demo](https://solink-xi.vercel.app/)
-
 [![Flutter CI](https://github.com/Idjibo33/Solink/actions/workflows/flutter.yml/badge.svg?branch=main)](https://github.com/Idjibo33/Solink/actions/workflows/flutter.yml)
 
-Solink est une application de réseau social conçue pour explorer les interactions en temps réel : les utilisateurs publient des posts, échangent via des likes, des commentaires et une messagerie instantanée. Le projet intègre aussi des fonctionnalités avancées de Firebase : Remote Config, ML Kit (identification et traduction de langue) et génération de texte par IA.
+Solink est une application mobile de réseau social : les utilisateurs publient des posts, échangent via des likes, des commentaires et une messagerie instantanée. Le projet intègre Firebase Auth, Cloud Firestore, Firebase Messaging, Remote Config, Firebase AI Logic et ML Kit (identification et traduction de langue).
 
 ## Fonctionnalités
 
-- **Authentification :** inscription et connexion Email / mot de passe, écran d'onboarding.
-- **Feed :** affichage des publications en temps réel (Firestore).
-- **Interactions :** likes et commentaires.
-- **Messagerie :** discussions et chat.
-- **Profil :** informations utilisateur.
-- **Pilotage à distance :** écran de maintenance et mise à jour forcée via **Firebase Remote Config**.
-- **Identification et traduction de texte :** détection de langue et traduction des posts (**ML Kit**).
+- **Authentification :** inscription et connexion Email / mot de passe, onboarding.
+- **Feed :** publications en temps réel (Firestore) et composition de posts.
+- **Interactions :** likes et commentaires optimistes.
+- **Messagerie :** conversations et chat en temps réel.
+- **Profil :** profil utilisateur, édition de la bio, déconnexion.
+- **Pilotage à distance :** maintenance et mise à jour forcée via **Firebase Remote Config**.
+- **Traduction :** détection de langue et traduction des posts (**ML Kit**).
 - **Génération de texte :** rédaction assistée par **IA** (Firebase AI Logic).
 
 ## Aperçu
@@ -30,7 +28,7 @@ Solink est une application de réseau social conçue pour explorer les interacti
 | <img src="assets/screenshots/discussions.png" width="180" alt="Discussions"> | <img src="assets/screenshots/chat.png" width="180" alt="Chat"> | <img src="assets/screenshots/profil.png" width="180" alt="Profil"> | <img src="assets/screenshots/maintenance.png" width="180" alt="Maintenance"> |
 
 <details>
-<summary>Voir plus de captures (chat détaillé, mise à jour forcée, génération IA)</summary>
+<summary>Voir plus de captures</summary>
 
 | | | |
 |---|---|---|
@@ -45,43 +43,62 @@ Solink est une application de réseau social conçue pour explorer les interacti
 | Domaine | Technologie |
 |---|---|
 | Framework | Flutter / Dart |
-| Backend | Firebase — Auth, Cloud Firestore, Storage, Messaging, Remote Config |
-| IA & ML | Firebase AI Logic (`firebase_ai`), ML Kit (language ID, traduction) |
-| Gestion d'état | Provider + get_it (injection) |
+| Backend | Firebase — Auth, Cloud Firestore, Messaging, Remote Config |
+| IA & ML | Firebase AI Logic (`gemini-2.5-flash`), ML Kit |
+| Architecture | Feature-first, couches data / domain / presentation |
+| Gestion d'état | `flutter_bloc` (Bloc + Cubit), `equatable` |
+| Erreurs | `fpdart` — `Either<Failure, T>` |
+| Navigation | `go_router` (StatefulShellRoute) |
+| Modèles | `json_serializable` + `build_runner` |
 | UI | `google_fonts`, `lordicon`, `gap` |
-| Configuration | Clés injectées au build via `--dart-define` (jamais commitées) |
 
-## Structure du projet
+## Architecture
 
 ```
 lib/
-├── main.dart                 # Point d'entrée (Firebase.initializeApp)
-├── firebase_options.dart     # Configuration Firebase (clés Android/iOS via --dart-define)
-├── auth_gate.dart            # Redirection selon l'état de connexion
-├── Models/                   # Modèles (Post, Chat, Commentaire, Utilisateur…),
-│                             # constantes, navigateurs, helpers
-├── Providers/                # État : Auth, Posts, Chats, Utilisateur, Version,
-│                             # Remote config, Machine learning, Ai logic
-├── Services/Firebase/        # Accès Firebase : Auth, Firestore, Messaging,
-│                             # Remote config, ML Kit, AI Logic
-└── Views/
-    ├── Screens/              # Écrans : Authentification, Feed, Chats,
-    │                         # Commentaires, Maintenance, Update, Profil
-    └── Widgets/              # Composants UI réutilisables
+├── main.dart                       # Firebase.initializeApp + composition root
+├── app.dart                        # MultiRepositoryProvider / MultiBlocProvider / GoRouter
+├── firebase_options.dart           # Configuration Firebase (clés Android/iOS via --dart-define)
+├── core/
+│   ├── constants/                  # Constantes applicatives
+│   ├── di/                         # AppDependencies (injection manuelle)
+│   ├── errors/                     # Failure sealed + mapping
+│   ├── router/                     # GoRouter, redirects, AppShell
+│   ├── theme/                      # Thème et styles partagés
+│   ├── utils/                      # Dates, validateurs
+│   └── widgets/                    # Composants UI réutilisables
+└── features/
+    ├── auth/                       # data / domain / presentation
+    ├── posts/                      # Feed, composer, commentaires
+    ├── chats/                      # Conversations, chat
+    ├── profile/
+    ├── settings/                   # Remote Config, splash, maintenance, update
+    ├── translation/                # ML Kit
+    └── ai/                         # Firebase AI Logic
 ```
 
-## Composants réutilisables
+Chaque feature suit le même découpage :
 
-- `custom_text_field.dart` / `password_text_field.dart` — champs de formulaire.
-- `bouton_like.dart` — bouton de like animé.
-- `bouton_principale.dart` / `bouton_secondaire.dart` — boutons.
-- `custom_container.dart` — conteneur stylé.
-- `chat_bubble.dart` — bulle de conversation.
-- `logo_widget.dart` — logo.
+- `data/` : modèles Firestore, services, implémentations des repositories.
+- `domain/` : interfaces de repositories et modèles métier.
+- `presentation/` : écrans, widgets, Bloc/Cubit.
+
+## Modèle Firestore
+
+| Collection | Contenu |
+|---|---|
+| `users/{uid}` | Profil public : `id`, `nom`, `prenom`, `bio`, `posts`, `followers`, `followings`, `creeLe`. **Aucun e-mail.** |
+| `users_private/{uid}` | Données privées : `id`, `email`, `creeLe`. Lecture réservée au propriétaire. |
+| `posts/{postId}` | `userId`, `userName`, `content`, `likes`, `comments`, `creeLe`. |
+| `posts/{postId}/comments/{commentId}` | `userId`, `userName`, `content`, `creeLe`. |
+| `chatrooms/{roomId}` | `membres` (triés), `dernierMessage`, `dernierEnvoi`. |
+| `chatrooms/{roomId}/messages/{messageId}` | `senderId`, `content`, `envoyeLe`. |
+
+Un index composite (`posts.userId` + `posts.creeLe`) est déclaré dans `firestore.indexes.json` pour les profils.
 
 ## Installation
 
-Prérequis : Flutter stable, un projet Firebase (Auth Email/Mot de passe, Firestore, Remote Config activés).
+Prérequis : Flutter stable, un projet Firebase avec Auth Email/Mot de passe, Firestore, Remote Config et Firebase AI Logic activés.
 
 ```bash
 flutter pub get
@@ -93,18 +110,144 @@ cp .env.example .env
 # 2. Lancer l'application en injectant les clés au build
 flutter run --dart-define-from-file=.env
 
-# (optionnel) régénérer la configuration Firebase
-dart pub global activate flutterfire_cli && flutterfire configure
+# 3. Régénérer les modèles après modification des annotations
+dart run build_runner build --delete-conflicting-outputs
 ```
 
-> - Les clés Android/iOS sont lues avec `String.fromEnvironment` : aucun fichier de secrets
->   n'est embarqué ni listé dans `pubspec.yaml`. Sans `--dart-define`, l'application compile
->   mais Firebase ne peut pas démarrer sur Android/iOS.
-> - La clé **web** Firebase reste dans `lib/firebase_options.dart` (identifiant client public par nature) ; la sécurité des données repose sur les **règles Firestore/Storage**, à restreindre avant toute mise en production.
+> Les clés Android/iOS sont lues avec `String.fromEnvironment` : aucun secret n'est
+> embarqué dans le dépôt. Sans `--dart-define`, l'application compile mais Firebase
+> ne peut pas démarrer sur Android/iOS.
+>
+> La clé web Firebase reste dans `lib/firebase_options.dart` (identifiant client public) ;
+> la sécurité repose sur les règles Firestore/Storage.
 
 ## Règles Firebase
 
-Les règles Firestore et Storage sont versionnées (`firestore.rules`, `storage.rules`) et référencées dans `firebase.json`. Leur déploiement reste manuel via la console Firebase ou `firebase deploy --only firestore:rules,storage`.
+Les règles sont versionnées et référencées dans `firebase.json`. Points importants :
+
+- Les profils `users` sont lisibles par tout utilisateur connecté, sans e-mail.
+- Les e-mails sont isolés dans `users_private`, accessibles uniquement à leur propriétaire.
+- Les likes utilisent des opérations ensemblistes (`arrayUnion` / `arrayRemove`) validées côté règles.
+- Le compteur `comments` ne peut être incrémenté que de 1 par commentaire.
+- Les messages d'un chat sont réservés aux membres de la room.
+
+> Les comptes historiques peuvent encore contenir `email` dans `users/{uid}`
+> tant que la migration décrite ci-dessous n'a pas été exécutée.
+
+### Valider les règles en local
+
+Prérequis : **Node.js 24+**, `firebase-tools` et **Java 21** (requis par
+l'émulateur Firestore).
+
+```bash
+cd tool
+npm install
+npm run test:rules
+```
+
+`firebase-tools` est installé localement dans `tool/node_modules` ; aucune
+installation globale n'est nécessaire.
+
+Le script démarre l'émulateur Firestore sur le projet `demo-solink` et exécute
+`firestore_rules_test.mjs` (profils, e-mails privés, likes, commentaires, posts,
+chat et migration de l'e-mail historique).
+
+### Déployer les règles
+
+```bash
+firebase login
+firebase deploy --project nomadvoyage-2025 \
+  --only firestore:rules,firestore:indexes,storage
+```
+
+## Migration des e-mails historiques
+
+Les anciens comptes peuvent encore avoir un champ `email` dans `users/{uid}`.
+Deux mécanismes le suppriment au profit de `users_private/{uid}` :
+
+1. **À la connexion** : `UserService.migrateLegacyEmail` copie l'e-mail dans
+   `users_private` puis retire le champ du profil public (transaction idempotente).
+2. **Pour tous les comptes** : script admin `tool/migrate_user_emails.mjs`, qui
+   contourne les règles via le SDK Admin.
+
+Créer un compte de service Firebase (`Cloud Datastore User` ou `Firebase Admin`),
+puis lancer d'abord un dry-run :
+
+```bash
+cd tool
+npm install
+GOOGLE_APPLICATION_CREDENTIALS=/chemin/serviceAccount.json \
+  DRY_RUN=true npm run migrate:emails
+```
+
+Puis l'exécution réelle :
+
+```bash
+GOOGLE_APPLICATION_CREDENTIALS=/chemin/serviceAccount.json npm run migrate:emails
+```
+
+Ne jamais committer le fichier de compte de service.
+
+## Signature Android
+
+Pour produire un APK/AAB release signé, créer `android/key.properties` (ignoré par Git) :
+
+```properties
+storePassword=...
+keyPassword=...
+keyAlias=...
+storeFile=/chemin/absolu/vers/keystore.jks
+```
+
+Sans ce fichier, le build release Android échoue explicitement : aucune release ne
+peut être produite avec la signature debug.
+
+L'`applicationId` et le `namespace` Android sont désormais `com.idjibo33.solink`.
+Le changement d'`applicationId` impose de réenregistrer l'application Android dans
+Firebase et de remplacer `android/app/google-services.json` :
+
+```bash
+firebase apps:create ANDROID SoLink \
+  --package-name com.idjibo33.solink \
+  --project nomadvoyage-2025
+
+# Récupérer l'App ID affiché, puis :
+firebase apps:sdkconfig ANDROID <APP_ID> \
+  --project nomadvoyage-2025 -o android/app/google-services.json
+
+# Mettre aussi à jour firebase_options.dart (appId Android)
+flutterfire configure --project nomadvoyage-2025
+```
+
+L'ancienne application Firebase `com.example.so_link` a été supprimée : seul le
+client `com.idjibo33.solink` reste dans `google-services.json`.
+
+## Configuration iOS
+
+Le bundle iOS est aligné sur Android : `com.idjibo33.solink`, avec une cible
+minimum iOS 15.0 (requise par Firebase). L'application Firebase iOS correspondante
+a été recréée avec l'appId
+`1:1094348719183:ios:c7072efc2063b51eca163a` ; l'ancienne app
+`com.example.soLink` a été supprimée.
+
+Le fichier `ios/Runner/GoogleService-Info.plist` n'est pas versionné : Firebase
+est initialisé via `firebase_options.dart` et la clé iOS vient de
+`IosApiKey` injectée au build. Si vous générez le plist localement, il reste
+ignoré par Git.
+
+La release iOS nécessite macOS, Xcode, CocoaPods, un compte Apple Developer,
+un certificat et un profil de provisioning associés à
+`com.idjibo33.solink`. Au premier build sur macOS, `pod install` génère
+`ios/Podfile.lock` : le committer pour figer les versions des pods. Pour
+`firebase_messaging`, activer la capability Push Notifications et configurer la
+clé APNs dans Firebase avant de publier.
+
+Commandes de release, une fois la signature configurée :
+
+```bash
+flutter build appbundle --release --dart-define-from-file=.env
+flutter build ipa --release --dart-define-from-file=.env
+```
 
 ## Tests
 
@@ -112,6 +255,22 @@ Les règles Firestore et Storage sont versionnées (`firestore.rules`, `storage.
 flutter analyze
 flutter test
 ```
+
+La suite couvre les Cubits/Blocs (auth, feed, composer, commentaires, chat, config),
+les modèles JSON, les validateurs et les parcours UI (connexion, inscription,
+onboarding, feed) via des dépôts simulés.
+
+Pour exécuter le parcours sur un appareil ou un émulateur Android :
+
+```bash
+flutter drive \
+  --driver=test_driver/integration_test.dart \
+  --target=integration_test/app_test.dart \
+  -d <device-id>
+```
+
+Le même scénario est rejoué par `flutter test` via
+`test/integration_app_flow_test.dart`, sans appareil.
 
 ## Licence
 
