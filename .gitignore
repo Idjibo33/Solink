@@ -44,3 +44,19 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Android signing
+android/key.properties
+*.jks
+*.keystore
+*.p12
+
+# iOS signing and push credentials
+*.mobileprovision
+*.p8
+
+# iOS Firebase config (contient la clé API cliente générée)
+ios/Runner/GoogleService-Info.plist
+
+# Outils Node (migration admin)
+tool/node_modules/

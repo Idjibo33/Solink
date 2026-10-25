@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1094348719183:android:5ed4aa46f34ed76fca163a",
+        "mobilesdk_app_id": "1:1094348719183:android:9f441be02ea340cdca163a",
         "android_client_info": {
-          "package_name": "com.example.so_link"
+          "package_name": "com.idjibo33.solink"
         }
       },
       "oauth_client": [],

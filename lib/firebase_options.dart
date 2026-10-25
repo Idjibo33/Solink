@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
 
   static final FirebaseOptions android = FirebaseOptions(
     apiKey: const String.fromEnvironment('AndroidApiKey'),
-    appId: '1:1094348719183:android:5ed4aa46f34ed76fca163a',
+    appId: '1:1094348719183:android:9f441be02ea340cdca163a',
     messagingSenderId: '1094348719183',
     projectId: 'nomadvoyage-2025',
     storageBucket: 'nomadvoyage-2025.firebasestorage.app',
@@ -66,10 +66,10 @@ class DefaultFirebaseOptions {
 
   static final FirebaseOptions ios = FirebaseOptions(
     apiKey: const String.fromEnvironment('IosApiKey'),
-    appId: '1:1094348719183:ios:65e2972eb92cba27ca163a',
+    appId: '1:1094348719183:ios:c7072efc2063b51eca163a',
     messagingSenderId: '1094348719183',
     projectId: 'nomadvoyage-2025',
     storageBucket: 'nomadvoyage-2025.firebasestorage.app',
-    iosBundleId: 'com.example.soLink',
+    iosBundleId: 'com.idjibo33.solink',
   );
 }
