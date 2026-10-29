@@ -81,7 +81,7 @@ void main() {
 
   test('send échoue proprement', () async {
     chatRepository.sendResult = const Left<Failure, void>(
-      FirestoreFailure('Envoi refusé'),
+      StorageFailure('Envoi refusé'),
     );
     await cubit.open(
       currentUser: userTest(),

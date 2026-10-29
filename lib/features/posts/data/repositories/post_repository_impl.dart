@@ -3,24 +3,24 @@ import 'package:so_link/core/errors/failure.dart';
 import 'package:so_link/features/auth/data/models/user_model.dart';
 import 'package:so_link/features/posts/data/models/comment_model.dart';
 import 'package:so_link/features/posts/data/models/post_model.dart';
-import 'package:so_link/features/posts/data/services/post_service.dart';
 import 'package:so_link/features/posts/domain/repositories/post_repository.dart';
+import 'package:so_link/features/posts/domain/repositories/post_store.dart';
 
 class PostRepositoryImpl implements PostRepository {
-  PostRepositoryImpl(this._service);
+  PostRepositoryImpl(this._store);
 
-  final PostService _service;
+  final PostStore _store;
 
   @override
-  Stream<List<PostModel>> watchFeed() => _service.watchFeed();
+  Stream<List<PostModel>> watchFeed() => _store.watchFeed();
 
   @override
   Stream<List<PostModel>> watchUserPosts(String userId) =>
-      _service.watchUserPosts(userId);
+      _store.watchUserPosts(userId);
 
   @override
   Stream<List<CommentModel>> watchComments(String postId) =>
-      _service.watchComments(postId);
+      _store.watchComments(postId);
 
   @override
   Future<Either<Failure, void>> createPost({
@@ -31,7 +31,7 @@ class PostRepositoryImpl implements PostRepository {
       return const Left(ValidationFailure('Le contenu du post est vide.'));
     }
     try {
-      await _service.createPost(author: author, content: content);
+      await _store.createPost(author: author, content: content);
       return const Right(null);
     } catch (error) {
       return Left(mapFailure(error));
@@ -48,7 +48,7 @@ class PostRepositoryImpl implements PostRepository {
       return const Left(ValidationFailure('Le commentaire est vide.'));
     }
     try {
-      await _service.addComment(
+      await _store.addComment(
         postId: postId,
         author: author,
         content: content,
@@ -65,7 +65,7 @@ class PostRepositoryImpl implements PostRepository {
     required String userId,
   }) async {
     try {
-      await _service.likePost(postId: postId, userId: userId);
+      await _store.likePost(postId: postId, userId: userId);
       return const Right(null);
     } catch (error) {
       return Left(mapFailure(error));
@@ -78,7 +78,7 @@ class PostRepositoryImpl implements PostRepository {
     required String userId,
   }) async {
     try {
-      await _service.unlikePost(postId: postId, userId: userId);
+      await _store.unlikePost(postId: postId, userId: userId);
       return const Right(null);
     } catch (error) {
       return Left(mapFailure(error));

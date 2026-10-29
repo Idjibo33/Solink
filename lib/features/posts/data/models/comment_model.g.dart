@@ -11,7 +11,7 @@ CommentModel _$CommentModelFromJson(Map<String, dynamic> json) => CommentModel(
   userId: json['userId'] as String,
   userName: json['userName'] as String,
   content: json['content'] as String,
-  creeLe: timestampFromJson(json['creeLe']),
+  creeLe: dateTimeFromJson(json['creeLe']),
 );
 
 Map<String, dynamic> _$CommentModelToJson(CommentModel instance) =>
@@ -20,5 +20,5 @@ Map<String, dynamic> _$CommentModelToJson(CommentModel instance) =>
       'userId': instance.userId,
       'userName': instance.userName,
       'content': instance.content,
-      'creeLe': timestampToJson(instance.creeLe),
+      'creeLe': dateTimeToJson(instance.creeLe),
     };

@@ -83,6 +83,17 @@ service cloud.firestore {
         && request.resource.data.followings == 0
         && request.resource.data.creeLe == request.time;
 
+      // Mise a jour de la bio seule (onboarding, edition du profil).
+      // `update` partiel : `request.resource.data` ne contient alors que les
+      // champs modifies, la verification porte sur `affectedKeys`.
+      allow update: if isOwner(userId)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(
+          ['bio']
+        )
+        && request.resource.data.bio is string
+        && request.resource.data.bio.size() <= 300;
+
+      // Mise a jour complete du document (synchronisation de profil).
       allow update: if isOwner(userId)
         && hasOnlyAllowedFields(
           request.resource.data,

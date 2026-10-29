@@ -1,7 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:so_link/features/auth/data/models/user_model.dart';
+import 'package:so_link/core/utils/date_serialization.dart';
 
 part 'comment_model.g.dart';
 
@@ -22,8 +21,8 @@ class CommentModel extends Equatable {
   final String userId;
   final String userName;
   final String content;
-  @JsonKey(fromJson: timestampFromJson, toJson: timestampToJson)
-  final Timestamp creeLe;
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
+  final DateTime creeLe;
 
   Map<String, dynamic> toJson() => _$CommentModelToJson(this);
 

@@ -14,7 +14,6 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
-
 const rules = readFileSync(new URL('../firestore.rules', import.meta.url), 'utf8');
 const emulatorHost = process.env.FIRESTORE_EMULATOR_HOST ?? '127.0.0.1:8080';
 const [host, port] = emulatorHost.split(':');
@@ -64,6 +63,20 @@ test('e-mail privé : lecture réservée au propriétaire', async () => {
   );
   await assertSucceeds(getDoc(doc(alice, 'users_private', 'alice')));
   await assertFails(getDoc(doc(bob, 'users_private', 'alice')));
+});
+
+test('profil public : la bio peut etre mise a jour seule', async () => {
+  const dave = env.authenticatedContext('dave').firestore();
+  await assertSucceeds(setDoc(doc(dave, 'users', 'dave'), publicUser('dave')));
+  await assertSucceeds(
+    updateDoc(doc(dave, 'users', 'dave'), { bio: 'Developpeur Flutter' }),
+  );
+  await assertFails(
+    updateDoc(doc(dave, 'users', 'dave'), { bio: 'x'.repeat(301) }),
+  );
+  await assertFails(
+    updateDoc(doc(bob, 'users', 'dave'), { bio: 'Intrusion' }),
+  );
 });
 
 test('likes : union limitée à son propre UID', async () => {

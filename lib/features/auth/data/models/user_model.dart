@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:so_link/core/utils/date_serialization.dart';
 
 part 'user_model.g.dart';
 
@@ -27,8 +27,8 @@ class UserModel extends Equatable {
   final int posts;
   final int followers;
   final int followings;
-  @JsonKey(fromJson: timestampFromJson, toJson: timestampToJson)
-  final Timestamp creeLe;
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
+  final DateTime creeLe;
 
   String get displayName {
     final values = [prenom, nom].where((value) => value.trim().isNotEmpty);
@@ -47,7 +47,7 @@ class UserModel extends Equatable {
     int? posts,
     int? followers,
     int? followings,
-    Timestamp? creeLe,
+    DateTime? creeLe,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -73,21 +73,3 @@ class UserModel extends Equatable {
     creeLe,
   ];
 }
-
-Timestamp timestampFromJson(Object? value) {
-  if (value is Timestamp) {
-    return value;
-  }
-  if (value is DateTime) {
-    return Timestamp.fromDate(value);
-  }
-  if (value is int) {
-    return Timestamp.fromMillisecondsSinceEpoch(value);
-  }
-  if (value is String) {
-    return Timestamp.fromDate(DateTime.parse(value));
-  }
-  return Timestamp.now();
-}
-
-Object timestampToJson(Timestamp value) => value;

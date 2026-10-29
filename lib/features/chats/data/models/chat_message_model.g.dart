@@ -11,7 +11,7 @@ ChatMessageModel _$ChatMessageModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       senderId: json['senderId'] as String,
       content: json['content'] as String,
-      envoyeLe: timestampFromJson(json['envoyeLe']),
+      envoyeLe: dateTimeFromJson(json['envoyeLe']),
     );
 
 Map<String, dynamic> _$ChatMessageModelToJson(ChatMessageModel instance) =>
@@ -19,5 +19,5 @@ Map<String, dynamic> _$ChatMessageModelToJson(ChatMessageModel instance) =>
       'id': instance.id,
       'senderId': instance.senderId,
       'content': instance.content,
-      'envoyeLe': timestampToJson(instance.envoyeLe),
+      'envoyeLe': dateTimeToJson(instance.envoyeLe),
     };

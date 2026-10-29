@@ -64,7 +64,7 @@ void main() {
 
   test('addComment échoue proprement', () async {
     repository.commentResult = const Left<Failure, void>(
-      FirestoreFailure('Refusé'),
+      StorageFailure('Refusé'),
     );
     cubit.load('post-1');
     await settle();

@@ -1,7 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:so_link/features/auth/data/models/user_model.dart';
+import 'package:so_link/core/utils/date_serialization.dart';
 
 part 'chat_message_model.g.dart';
 
@@ -20,8 +19,8 @@ class ChatMessageModel extends Equatable {
   final String id;
   final String senderId;
   final String content;
-  @JsonKey(fromJson: timestampFromJson, toJson: timestampToJson)
-  final Timestamp envoyeLe;
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
+  final DateTime envoyeLe;
 
   Map<String, dynamic> toJson() => _$ChatMessageModelToJson(this);
 

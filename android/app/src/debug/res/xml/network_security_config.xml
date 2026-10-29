@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Autorise le trafic HTTP en clair vers les emulateurs Firebase locaux.
+
+  Ce fichier n'est present que dans le variant `debug` : les builds de
+  release et de profile conservent la politique par defaut d'Android, qui
+  refuse tout trafic non chiffre.
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- 10.0.2.2 est l'alias de l'hote depuis l'emulateur Android. -->
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+        <domain includeSubdomains="true">localhost</domain>
+    </domain-config>
+
+    <!--
+      Le SDK Android d'authentification tente de joindre les services Google
+      (reCAPTCHA, App Check) avant d'appeler l'emulateur. Ces domaines sont
+      autorises en clair uniquement dans le variant debug.
+    -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
