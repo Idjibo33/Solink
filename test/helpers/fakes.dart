@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:so_link/core/errors/failure.dart';
 import 'package:so_link/features/ai/domain/repositories/ai_repository.dart';
@@ -30,7 +29,7 @@ UserModel userTest({
     posts: posts,
     followers: 0,
     followings: 0,
-    creeLe: Timestamp.fromMillisecondsSinceEpoch(0),
+    creeLe: DateTime.fromMillisecondsSinceEpoch(0),
   );
 }
 
@@ -49,7 +48,7 @@ PostModel postTest({
     content: content,
     likes: likes,
     comments: comments,
-    creeLe: Timestamp.fromMillisecondsSinceEpoch(0),
+    creeLe: DateTime.fromMillisecondsSinceEpoch(0),
   );
 }
 
@@ -62,7 +61,7 @@ CommentModel commentTest({
     userId: 'user-1',
     userName: 'Ismaël Djibo',
     content: content,
-    creeLe: Timestamp.fromMillisecondsSinceEpoch(0),
+    creeLe: DateTime.fromMillisecondsSinceEpoch(0),
   );
 }
 
@@ -75,7 +74,7 @@ ChatMessageModel messageTest({
     id: id,
     senderId: senderId,
     content: content,
-    envoyeLe: Timestamp.fromMillisecondsSinceEpoch(0),
+    envoyeLe: DateTime.fromMillisecondsSinceEpoch(0),
   );
 }
 

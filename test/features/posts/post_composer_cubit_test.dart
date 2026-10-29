@@ -59,7 +59,7 @@ void main() {
 
   test('publish échoue proprement', () async {
     postRepository.createResult = const Left<Failure, void>(
-      FirestoreFailure('Écriture refusée'),
+      StorageFailure('Écriture refusée'),
     );
 
     await cubit.publish(author: userTest(), content: 'Mon post');

@@ -13,7 +13,7 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) => PostModel(
   content: json['content'] as String,
   comments: (json['comments'] as num).toInt(),
   likes: stringListFromJson(json['likes']),
-  creeLe: timestampFromJson(json['creeLe']),
+  creeLe: dateTimeFromJson(json['creeLe']),
 );
 
 Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{
@@ -23,5 +23,5 @@ Map<String, dynamic> _$PostModelToJson(PostModel instance) => <String, dynamic>{
   'content': instance.content,
   'comments': instance.comments,
   'likes': stringListToJson(instance.likes),
-  'creeLe': timestampToJson(instance.creeLe),
+  'creeLe': dateTimeToJson(instance.creeLe),
 };

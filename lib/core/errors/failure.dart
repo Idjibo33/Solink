@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:so_link/core/errors/error_codes.dart';
 
 sealed class Failure extends Equatable {
   const Failure(this.message);
@@ -21,8 +21,9 @@ final class ValidationFailure extends Failure {
   const ValidationFailure(super.message);
 }
 
-final class FirestoreFailure extends Failure {
-  const FirestoreFailure(super.message);
+/// Echec du stockage de donnees, quel que soit le backend utilise.
+final class StorageFailure extends Failure {
+  const StorageFailure(super.message);
 }
 
 final class AiFailure extends Failure {
@@ -41,33 +42,45 @@ final class UnexpectedFailure extends Failure {
   const UnexpectedFailure(super.message);
 }
 
+/// Traduit une erreur technique en `Failure` affichable.
+///
+/// Les adaptateurs de backend lancent des `AppException` portant un code
+/// stable ; ce mapping est donc independant du fournisseur utilise.
 Failure mapFailure(Object error) {
   if (error is Failure) {
     return error;
   }
-  if (error is FirebaseAuthException) {
-    return AuthFailure(_authMessage(error));
-  }
-  if (error is FirebaseException) {
-    return FirestoreFailure(
-      error.message ?? 'Une erreur Firebase est survenue.',
-    );
+  if (error is AppException) {
+    return _mapCode(error.code, error.message);
   }
   return UnexpectedFailure(error.toString());
 }
 
-String _authMessage(FirebaseAuthException error) {
-  return switch (error.code) {
-    'invalid-email' => 'Adresse e-mail invalide.',
-    'user-disabled' => 'Ce compte est désactivé.',
-    'user-not-found' => 'Aucun compte ne correspond à cet e-mail.',
-    'wrong-password' => 'Mot de passe incorrect.',
-    'invalid-credential' => 'E-mail ou mot de passe incorrect.',
-    'email-already-in-use' => 'Un compte existe déjà avec cet e-mail.',
-    'weak-password' => 'Le mot de passe est trop faible.',
-    'network-request-failed' => 'Connexion réseau indisponible.',
-    'too-many-requests' => 'Trop de tentatives. Réessayez plus tard.',
-    'operation-not-allowed' => 'Cette méthode de connexion est désactivée.',
-    _ => error.message ?? 'Authentification impossible.',
+Failure _mapCode(String code, String fallback) {
+  return switch (code) {
+    ErrorCodes.invalidEmail => const AuthFailure('Adresse e-mail invalide.'),
+    ErrorCodes.userDisabled =>
+      const AuthFailure('Ce compte est désactivé.'),
+    ErrorCodes.userNotFound =>
+      const AuthFailure('Aucun compte ne correspond à cet e-mail.'),
+    ErrorCodes.wrongPassword => const AuthFailure('Mot de passe incorrect.'),
+    ErrorCodes.invalidCredential =>
+      const AuthFailure('E-mail ou mot de passe incorrect.'),
+    ErrorCodes.emailAlreadyInUse =>
+      const AuthFailure('Un compte existe déjà avec cet e-mail.'),
+    ErrorCodes.weakPassword =>
+      const AuthFailure('Le mot de passe est trop faible.'),
+    ErrorCodes.networkRequestFailed =>
+      const AuthFailure('Connexion réseau indisponible.'),
+    ErrorCodes.tooManyRequests =>
+      const AuthFailure('Trop de tentatives. Réessayez plus tard.'),
+    ErrorCodes.operationNotAllowed =>
+      const AuthFailure('Cette méthode de connexion est désactivée.'),
+    ErrorCodes.permissionDenied =>
+      const StorageFailure('Accès refusé par le serveur.'),
+    ErrorCodes.notFound => const StorageFailure('Ressource introuvable.'),
+    ErrorCodes.unavailable =>
+      const StorageFailure('Le service est momentanément indisponible.'),
+    _ => StorageFailure(fallback),
   };
 }

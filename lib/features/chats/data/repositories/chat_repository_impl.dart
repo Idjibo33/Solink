@@ -1,20 +1,20 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:so_link/core/errors/failure.dart';
 import 'package:so_link/features/chats/data/models/chat_message_model.dart';
-import 'package:so_link/features/chats/data/services/chat_service.dart';
 import 'package:so_link/features/chats/domain/repositories/chat_repository.dart';
+import 'package:so_link/features/chats/domain/repositories/chat_store.dart';
 
 class ChatRepositoryImpl implements ChatRepository {
-  ChatRepositoryImpl(this._service);
+  ChatRepositoryImpl(this._store);
 
-  final ChatService _service;
+  final ChatStore _store;
 
   @override
   Stream<List<ChatMessageModel>> watchMessages({
     required String senderId,
     required String receiverId,
   }) {
-    return _service.watchMessages(senderId: senderId, receiverId: receiverId);
+    return _store.watchMessages(senderId: senderId, receiverId: receiverId);
   }
 
   @override
@@ -27,7 +27,7 @@ class ChatRepositoryImpl implements ChatRepository {
       return const Left(ValidationFailure('Le message est vide.'));
     }
     try {
-      await _service.sendMessage(
+      await _store.sendMessage(
         senderId: senderId,
         receiverId: receiverId,
         content: content,

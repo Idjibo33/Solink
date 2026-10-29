@@ -1,7 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:so_link/features/auth/data/models/user_model.dart';
+import 'package:so_link/core/utils/date_serialization.dart';
 
 part 'post_model.g.dart';
 
@@ -27,8 +26,8 @@ class PostModel extends Equatable {
   final int comments;
   @JsonKey(fromJson: stringListFromJson, toJson: stringListToJson)
   final List<String> likes;
-  @JsonKey(fromJson: timestampFromJson, toJson: timestampToJson)
-  final Timestamp creeLe;
+  @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
+  final DateTime creeLe;
 
   bool isLikedBy(String userId) => likes.contains(userId);
 
@@ -41,7 +40,7 @@ class PostModel extends Equatable {
     String? content,
     int? comments,
     List<String>? likes,
-    Timestamp? creeLe,
+    DateTime? creeLe,
   }) {
     return PostModel(
       id: id ?? this.id,

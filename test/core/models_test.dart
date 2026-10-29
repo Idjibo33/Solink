@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:so_link/features/auth/data/models/user_model.dart';
 import 'package:so_link/features/chats/data/models/chat_message_model.dart';
@@ -6,7 +5,9 @@ import 'package:so_link/features/posts/data/models/comment_model.dart';
 import 'package:so_link/features/posts/data/models/post_model.dart';
 
 void main() {
-  final timestamp = Timestamp.fromMillisecondsSinceEpoch(1700000000000);
+  // Les modeles stockent des dates UTC : la serialisation est stable quel que
+  // soit le fuseau horaire de l'appareil.
+  final timestamp = DateTime.fromMillisecondsSinceEpoch(1700000000000, isUtc: true);
 
   test('UserModel fait un aller-retour JSON', () {
     final model = UserModel(

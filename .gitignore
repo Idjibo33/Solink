@@ -60,3 +60,10 @@ ios/Runner/GoogleService-Info.plist
 
 # Outils Node (migration admin)
 tool/node_modules/
+
+# Journal de l'emulateur Firestore
+tool/firestore-debug.log
+
+# Ressources locales de developpement
+.opencode/
+PROMPT_*.md

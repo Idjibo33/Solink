@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "migrate:emails": "node migrate_user_emails.mjs",
+    "seed": "node seed_firestore.mjs",
+    "emulators": "firebase emulators:start --only firestore,auth --project demo-solink",
     "test:rules": "firebase emulators:exec --only firestore --project demo-solink \"node --test firestore_rules_test.mjs\""
   },
   "dependencies": {
